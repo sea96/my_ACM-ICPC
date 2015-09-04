@@ -157,7 +157,7 @@ void preKMP(char x[],int m,int kmpNext[])
     if(x[++i]==x[++j])kmpNext[i]=kmpNext[j]; 
     else kmpNext[i]=j; 
   } 
-} http://www.cnblogs.com/Running-Time/p/4712639.html
+}
 /* 
  * 返回x在y中出现的次数，可以重叠 
  */ 
