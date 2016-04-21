@@ -1,13 +1,22 @@
-//欧拉筛法(Euler)：返回n以内素数的个数， 复杂度O (n)
+//欧拉筛法(Euler)：返回n以内素数的个数， 复杂度O (n) ?
 int seive(int n) {
     int p = 0;
     memset (is_prime, true, sizeof (is_prime));
     is_prime[0] = is_prime[1] = false;
+    //phi[1] = 1;
     for (int i=2; i<=n; ++i) {
-        if (is_prime[i]) prime[++p] = i;
+        if (is_prime[i]) {
+            prime[++p] = i;
+            //phi[i] = i - 1;
+        }
         for (int j=1; j<=p && i*prime[j]<=n; ++j) {
             is_prime[i*prime[j]] = false;
-            if (i % prime[j] == 0) break;
+            if (i % prime[j] == 0) {
+                //phi[i*prime[j]] = phi[i] * prime[j];
+                break;
+            } else {
+                //phi[i*prime[j]] = phi[i] * (prime[j] - 1);
+            }
         }
     }
     return p;
@@ -50,7 +59,7 @@ bool Miller_Rabin(ll n) {
     while (! (x & 1)) {
         x >>= 1;  t++;
     }
-    for (int i=1; i<=S; ++i) {                      //srand (time (NULL)); s=20
+    for (int i=1; i<=S; ++i) {                      //srand (time (NULL)); S=20
         ll a = rand () % (n - 1) + 1;               //需要cstdlib，ctime头文件
         if (check (a, n, x, t)) return false;       //合数
     }
@@ -118,4 +127,27 @@ vector<int> divisor(int n)  {
         }
     }
     return res;
+}
+
+/*
+    *对正整数n，欧拉函数是少于或等于n的数中与n互质的数的数目。
+    *例如euler(8)=4，因为1,3,5,7均和8互质。
+    *Euler函数表达通式：euler(x)=x(1-1/p1)(1-1/p2)(1-1/p3)(1-1/p4)…(1-1/pn),
+    *其中p1,p2……pn为x的所有素因数，x是不为0的整数。euler(1)=1 
+    *欧拉公式的延伸：一个数的所有质因子之和是euler(n)*n/2。
+*/
+//线性筛 详见欧拉筛素数，欧拉函数 phi[i]
+//单独求数 欧拉函数 phi[n]
+int eular(int n)  {
+    int ret = n;
+    for (int i = 2; i*i<=n; ++i) {
+        if (n % i == 0) {
+            ret -= ret / i;
+            while (n % i == 0) {
+                n /= i;
+            }
+        }
+    }
+    if (x > 1) ret -= ret / n;
+    return ret;
 }
