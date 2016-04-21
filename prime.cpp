@@ -50,7 +50,7 @@ bool Miller_Rabin(ll n) {
     while (! (x & 1)) {
         x >>= 1;  t++;
     }
-    for (int i=1; i<=S; ++i) {                      //srand (time (NULL));
+    for (int i=1; i<=S; ++i) {                      //srand (time (NULL)); s=20
         ll a = rand () % (n - 1) + 1;               //需要cstdlib，ctime头文件
         if (check (a, n, x, t)) return false;       //合数
     }
