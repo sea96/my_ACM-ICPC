@@ -26,7 +26,7 @@ void DA(char *r, int n, int m = 128) {
         for (i=1; i<m; ++i) ws[i] += ws[i-1];
         for (i=n-1; i>=0; --i) sa[--ws[x[y[i]]]] = y[i];
         std::swap (x, y);
-        for (p = 1, x[sa[0]] = 0, i=1; i<n; ++i) {
+        for (p=1, x[sa[0]]=0, i=1; i<n; ++i) {
             x[sa[i]] = cmp (y, sa[i-1], sa[i], j) ? p - 1 : p++;
         }
     }
