@@ -1,8 +1,8 @@
 /*
-	*后缀数组，倍增算法实现，复杂度O(nlogn)
-	*sa[i]: 第i小的后缀是在字符串位置，即后缀sa[i]
-	*rank[i]: 后追i在sa数组下标，即第rank[i]小
-	*height[i]: LCP (suffix (sa[i-1], sa[i]))
+    *后缀数组，倍增算法实现，复杂度O(nlogn)
+    *sa[i]: 第i小的后缀是在字符串位置，即后缀sa[i]
+    *rank[i]: 后追i在sa数组下标，即第rank[i]小
+    *height[i]: LCP (suffix (sa[i-1], sa[i]))
 */
 int sa[N], rank[N], height[N];
 int ws[N], wa[N], wb[N];
@@ -33,7 +33,7 @@ void DA(char *r, int n, int m = 128) {
 }
 void calc_height(char *r, int *sa, int n) {
     int i, j, k = 0;
-    for (i=1; i<=n; ++i) rank[sa[i]] = i; //i: 第i小的后缀 sa[0] = n(s[n]='\0')
+    for (i=1; i<=n; ++i) rank[sa[i]] = i; //sa[0] = n(s[n]='\0')
     for (i=0; i<n; ++i) { //i: 后缀i
         if (k) k--;
         j = sa[rank[i]-1];
@@ -41,7 +41,3 @@ void calc_height(char *r, int *sa, int n) {
         height[rank[i]] = k;  //其实并没有计算height[n]
     }
 }
-/*
-	*LCP (suffix (i), suffix (j)) = min (height[l] to height[r]); //RMQ
-	*l = rank[i], r = rank[j]; if (l > r) swap (l, r); l++;
-*/
