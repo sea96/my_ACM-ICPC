@@ -5,38 +5,41 @@
 */
 const double EPS = 1e-10;
 const double PI = acos (-1.0);
-int dcmp(double x)  {       //三态函数，减少精度问题
+int dcmp(double x) {  //三态函数，减少精度问题
     if (fabs (x) < EPS) return 0;
     else    return x < 0 ? -1 : 1;
 }
-struct Point    {       //点的定义
+struct Point {  //点的定义
     double x, y;
-    Point () {}
-    Point (double x, double y) : x (x), y (y) {}
-    Point operator + (const Point &r) const {       //向量加法
+    Point (double _x=0.0, double _y=0.0) : x (_x), y (_y) {}
+    Point operator + (const Point &r) const {  //向量加法
         return Point (x + r.x, y + r.y);
     }
-    Point operator - (const Point &r) const {       //向量减法
+    Point operator - (const Point &r) const {  //向量减法
         return Point (x - r.x, y - r.y);
     }
-    Point operator * (double p) const {       //向量乘以标量
+    Point operator * (double p) const {  //向量乘以标量
         return Point (x * p, y * p);
     }
-    Point operator / (double p) const {       //向量除以标量
+    Point operator / (double p) const {  //向量除以标量
         return Point (x / p, y / p);
     }
-    bool operator < (const Point &r) const {       //点的坐标排序
+    bool operator < (const Point &r) const {  //点的坐标排序
         return x < r.x || (x == r.x && y < r.y);
     }
-    bool operator == (const Point &r) const {       //判断同一个点
+    bool operator == (const Point &r) const {  //判断同一个点
         return dcmp (x - r.x) == 0 && dcmp (y - r.y) == 0;
     }
+    void read() {
+        double _x, _y; scanf ("%lf%lf", &_x, &_y);
+        x = _x; y = _y;
+    }
+    void print() {
+        printf ("%.2f %.2f\n", x, y);
+    }
 };
-typedef Point Vector;       //向量的定义
-Point read_point(void)   {      //点的读入
-    double x, y;    scanf ("%lf%lf", &x, &y);
-    return Point (x, y);
-}
+typedef Point Vector;  //向量的定义
+
 double dot(Vector A, Vector B)  {       //向量点积
     return A.x * B.x + A.y * B.y;
 }
