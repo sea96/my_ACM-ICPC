@@ -3,11 +3,13 @@
     *LCA预处理复杂度O (logn)，每次询问O (logn)
     *DFS中要记录点的深度以及它的父亲，(dep[u] = d; rt[u][0] = fa;)
 */
-void DFS(int u, int fa, int k) {
-    rt[u][0] = fa; dep[u] = k;
+void DFS(int u, int fa) {
+    rt[u][0] = fa; dep[u] = dep[fa] + 1;
     for (auto v: G[u]) {
-        if (v == fa) continue;
-        DFS (v, u, k + 1);
+        if (v == fa) {
+           continue;
+        }
+        DFS (v, u);
     }
 }
 
