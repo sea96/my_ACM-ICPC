@@ -10,21 +10,27 @@ void DFS(int u, int fa, int k) {
         DFS (v, u, k + 1);
     }
 }
-void init_doubling() {
+
+void init_LCA() {
     for (int j=1; j<D; ++j) {
         for (int i=1; i<=n; ++i) {
-            rt[i][j] = rt[i][j-1] == -1 ? -1 : rt[rt[i][j-1]][j-1];
+            rt[i][j] = rt[i][j-1] == 0 ? 0 : rt[rt[i][j-1]][j-1];
         }
     }
 }
+
 int LCA(int u, int v) {
-    if (dep[u] < dep[v]) std::swap (u, v);
+    if (dep[u] < dep[v]) {
+        std::swap (u, v);
+    }
     for (int i=0; i<D; ++i) {
         if ((dep[u] - dep[v]) >> i & 1) {
             u = rt[u][i];
         }
     }
-    if (u == v) return u;
+    if (u == v) {
+        return u;
+    }
     for (int i=D-1; i>=0; --i) {
         if (rt[u][i] != rt[v][i]) {
             u = rt[u][i];
