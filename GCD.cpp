@@ -2,15 +2,6 @@
 int GCD(int a, int b) {
     return b ? GCD (b, a % b) : a;
 }
-//非递归版本
-int GCD(int a, int b) {
-    while (b) {
-        int c = b;
-        b = a % b;
-        a = c;
-    }
-    return a;
-}
 //快速GCD
 int quick_GCD(int a, int b) {
     if (!a) return b;
