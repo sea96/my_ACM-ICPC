@@ -124,6 +124,38 @@ vector<Point> convex_hull(vector<Point> ps) {
     qs.resize (k-1);
     return qs;
 }
+/*
+	*最近点对问题，分治法，先按照x坐标排序，求解(left, mid)和(mid+1, right)范围的最小值，
+	*然后类似区间合并，分离mid左右的点也求最小值
+*/
+double min_dist(int left, int right) {
+    if (left == right) {
+        return INF;
+    }
+    else if (right - left == 1) {
+        return get_dist (point[left], point[right]);
+    } else {
+        int mid = left + right >> 1;
+        double ret = std::min (min_dist (left, mid), min_dist (mid + 1, right));
+        if (ret == 0) {
+            return ret;
+        }
+        int endy = 0;
+        for (int i=mid; i>=left&&point[mid].x-point[i].x<=ret; --i) {
+            idy[endy++] = i;
+        }
+        for (int i=mid+1; i<=right&&point[i].x-point[mid+1].x<=ret; ++i) {
+            idy[endy++] = i;
+        }
+        std::sort (idy, idy+endy, cmp_y);  //return point[i].y < point[j].y;
+        for (int i=0; i<endy; ++i) {
+            for (int j=i+1; j<endy&&point[j].y-point[i].y<ret; ++j) {
+                ret = std::min (ret, get_dist (point[i], point[j]));
+            }
+        }
+        return ret;
+    }
+}
 
 struct Line {
     Point p;
