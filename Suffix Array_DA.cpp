@@ -40,7 +40,6 @@ int Suffix_Array::solve(char *str, int m) {
     //print ();
 
     RMQ_init ();
-	
 	//solve
 }
 
