@@ -41,7 +41,7 @@ int Suffix_Array::solve(char *str, int m) {
 
     RMQ_init ();
 	
-	//solve...
+	//solve
 }
 
 //RMQ_query (rank[i], rank[j]);
