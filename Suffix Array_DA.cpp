@@ -38,9 +38,8 @@ int Suffix_Array::solve(char *str, int m) {
     build_sa (28);  //a~z
     get_height ();
     //print ();
-
     RMQ_init ();
-	//solve
+    //solve it!
 }
 
 //RMQ_query (rank[i], rank[j]);
