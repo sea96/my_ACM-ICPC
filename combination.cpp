@@ -1,18 +1,16 @@
 //递推，对MOD没有要求，预处理时间复杂度O(n^2)
-const int N = 2000 + 10;
-const int MOD = 1e9 + 7;
-int comb[N][N];
-void init() {　　　　
-    for (int i=0; i<N; ++i) {
-        comb[i][i] = comb[i][0] = 1;
-        for (int j=1; j<i; ++j) {
-            comb[i][j] = comb[i-1][j] + comb[i-1][j-1];
-            if (comb[i][j] >= MOD)  {
-                comb[i][j] -= MOD;
+//C[n][m] = C (n, m) % MOD
+void init() {
+    C[0][0] = 1;
+    for (int i=0; i<25; ++i) {
+        C[i][0] = C[i][i] = 1;
+        for (int j=1; j<i; ++i) {
+            C[i][j] = C[i-1][j] + C[i-1][j-1];
+            if (C[i][j] >= MOD) {
+                C[i][j] -= MOD;
             }
         }
     }
-    //printf ("%d\n", comb[6][3]);
 }
 
 //要求MOD是质数，预处理时间复杂度O(n)
@@ -30,7 +28,8 @@ void init() {
         finv[i] = finv[i-1] * 1ll * inv[i] % MOD;
     }
 }
-int comb(int n, int k)  {       //C (n, k) % MOD
+//C (n, k) % MOD
+int comb(int n, int k)  {
     if (k < 0 || k > n) return 0;
     return f[n] * 1ll * finv[n-k] % MOD * finv[k] % MOD;
 }
