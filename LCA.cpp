@@ -76,7 +76,7 @@ int LCA(int u, int v) {
 }
 
 /*
-    *LCA离线处理，Tarjan算法，复杂度O (N+Q)
+    *LCA离线处理，Tarjan算法，复杂度O(N+Q)
     *对询问次序按深搜时遍历到的节点顺序进行重组，并查集找祖先
     *ans[i]表示第i个询问的LCA
 */
