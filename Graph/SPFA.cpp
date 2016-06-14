@@ -6,7 +6,8 @@ bool SPFA(int s) {
     std::queue<int> que;
     que.push (s);
     while (!que.empty ()) {
-        int u = que.front (); que.pop ();
+        int u = que.front ();
+        que.pop ();
         vis[u] = false;
         for (int i=head[u]; ~i; i=edge[i].nex) {
             Edge &e = edge[i];
