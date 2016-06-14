@@ -1,5 +1,5 @@
 /*
-    *大数模版-copy from JayYe
+    *大数模版 copy from JayYe
 */
 const int numlen = 2005; // 需要的位数
 const int numbit = 4;   // 数组一位表示的整数
