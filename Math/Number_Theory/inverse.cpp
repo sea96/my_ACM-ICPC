@@ -8,7 +8,7 @@ void Inv(int n, int mod) {
 }
 //求法2：复杂度 O(logn)
 int Inv(int a, int mod) {
-    return modow_mod (a, mod - 2, mod);
+    return pow_mod (a, mod - 2, mod);
 }
 //求法3：扩展欧几里德求解
 int Inv(int a, int mod) {
