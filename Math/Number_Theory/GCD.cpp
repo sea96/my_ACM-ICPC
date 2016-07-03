@@ -15,17 +15,18 @@ int quick_GCD(int a, int b) {
 /*
     *扩展欧几里得算法，求x, y 使得 ax + by = GCD (a, b)
     *返回d = GCD (a,b)，和对应于等式 ax + by = d中的x，y
-    *求解 ax + by = c: 当c是d的倍数时，记倍数为k，解为kx，ky；否则无解
+    *求解 ax + by = c: 当c是d的倍数时，记倍数为k，解为x0=kx，y0=ky；否则无解
+    *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n;
 */
-int ex_GCD(int a, int b, int &x, int &y)    {
-    if (!a && !b)   return -1;  //无最大公约数
-    if (!b) {
-        x = 1; y = 0;   //a*1+0*b=a
-        return a;
+void ex_GCD(int a, int b, int &x, int &y, int &d) {
+    if (!a && !b) {
+        d = -1;
+    } else if (!b) {
+        x = 1; y = 0; d = a;
+    } else {
+        ex_GCD (b, a % b, y, x, d);
+        y -= a / b * x;
     }
-    int d = ex_GCD (b, a % b, y, x);
-    y -= a / b * x;
-    return d;
 }
 /*
     *模线性方程 ax = b (mod n)
