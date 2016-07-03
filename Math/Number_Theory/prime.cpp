@@ -147,6 +147,6 @@ int eular(int n)  {
             }
         }
     }
-    if (x > 1) ret -= ret / n;
+    if (n > 1) ret -= ret / n;
     return ret;
 }
