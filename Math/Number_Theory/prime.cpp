@@ -135,18 +135,35 @@ vector<int> divisor(int n)  {
     *其中p1,p2……pn为x的所有素因数，x是不为0的整数。euler(1)=1 
     *欧拉公式的延伸：一个数的所有质因子之和是euler(n)*n/2。
 */
-//线性筛 详见欧拉筛素数，欧拉函数 phi[i]
-//单独求数 欧拉函数 phi[n]
-int eular(int n)  {
+//单独求数 欧拉函数phi[n]
+int phi(int n) {
+    int m = (int) sqrt (n + 0.5);
     int ret = n;
-    for (int i = 2; i*i<=n; ++i) {
+    for (int i=2; i<=m; ++i) {
         if (n % i == 0) {
-            ret -= ret / i;
+            ret = ret / i * (i - 1);
             while (n % i == 0) {
                 n /= i;
             }
         }
     }
-    if (n > 1) ret -= ret / n;
+    if (n > 1) {
+        ret = ret / n * (n - 1);
+    }
     return ret;
+}
+//线性筛，复杂度 O(nloglogn)，还有欧拉筛素数顺便求phi[i]
+void phi_table(int n) {
+    memset (phi, 0, sizeof (phi));
+    phi[1] = 1;
+    for (int i=2; i<=n; ++i) {
+        if (!phi[i]) {
+            for (int j=i; j<=n; j+=i) {
+                if (!phi[j]) {
+                    phi[j] = j;
+                }
+                phi[j] = phi[j] / i * (i - 1);
+            }
+        }
+    }
 }
