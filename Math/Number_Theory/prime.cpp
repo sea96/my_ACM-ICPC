@@ -1,5 +1,5 @@
 //欧拉筛法(Euler)：返回n以内素数的个数（保存在prime[0]）， 复杂度O(n) ?
-void seive(int n) {
+void sieve(int n) {
     int &p = prime[0] = 0;
     memset (is_prime, true, sizeof (is_prime));
     is_prime[0] = is_prime[1] = false;
