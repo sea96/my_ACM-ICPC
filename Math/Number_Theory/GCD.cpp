@@ -16,7 +16,7 @@ int quick_GCD(int a, int b) {
     *扩展欧几里得算法，求x, y 使得 ax + by = GCD (a, b)
     *返回d = GCD (a,b)，和对应于等式 ax + by = d中的x，y
     *求解 ax + by = c: 当c是d的倍数时，记倍数为k，解为x0=kx，y0=ky；否则无解
-    *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n;
+    *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n, n为整数
 */
 void ex_GCD(int a, int b, int &x, int &y, int &d) {
     if (!a && !b) {
