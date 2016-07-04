@@ -76,18 +76,22 @@ bool check(ll a, ll n, ll x, int t) {
     return false;
 }
 
-//整数分解，先打个素数表优化试除法
-vector<int> factorize(int n) {
-    int p = seive (n + 0.5);
-    vector<int> ret;
-    for (int i=1; i<=p; ++i) {
-        while (n % prime[i] == 0) {
-            n /= prime[i];
-            ret.push_back (prime[i]);
+//唯一分解定理，先打个素数表优化试除法
+void get_factors(int n) {
+    std::vector<Node> factors;
+    for (int i=1; i<=prime[0]; ++i) {
+        if (n % prime[i] == 0) {
+            int f = prime[i], c = 0;
+            while (n % prime[i] == 0) {
+                n /= prime[i];
+                c++;
+            }
+            factors.push_back ((Node) {f, c});
         }
     }
-    if (n != 1) ret.push_back (n);
-    return ret;
+    if (n > 1) {
+        factors.push_back ((Node) {(n, 1});
+    }
 }
 /*
     *大整数分解，Pollard_rho 随机算法
