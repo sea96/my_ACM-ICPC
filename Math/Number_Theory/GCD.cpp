@@ -19,9 +19,7 @@ int quick_GCD(int a, int b) {
     *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n, n为整数
 */
 void ex_GCD(int a, int b, int &x, int &y, int &d) {
-    if (!a && !b) {
-        d = -1;
-    } else if (!b) {
+    if (!b) {
         x = 1; y = 0; d = a;
     } else {
         ex_GCD (b, a % b, y, x, d);
@@ -29,11 +27,11 @@ void ex_GCD(int a, int b, int &x, int &y, int &d) {
     }
 }
 /*
-    *模线性方程 ax = b (mod n)
+    *模线性方程(modular_linear_equation) ax = b (mod n)
     *转换为ax = ny + b，即ax - ny = b。答案保存在xs里
     *返回true，有解；false，无解
 */
-bool modular_linear_equation(int a, int b, int n, std::vector<int> &xs) {
+bool mod_linear_equ(int a, int b, int n, std::vector<int> &xs) {
     int x, y;
     int d = ex_GCD (a, n, x, y);
     if (b % d) {
