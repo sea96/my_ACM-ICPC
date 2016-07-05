@@ -10,7 +10,7 @@ int Manacher(char *s) {
     }
     s[0] = '$';
     n = n * 2 + 2;
-    int id = 0; p[0] = 1;
+    int mx = 0, id = 0; p[0] = 1;
     for (int i=2; i<n; ++i) {
         if (id + p[id] > i) {
             p[i] = std::min (p[2*id-i], id + p[id] - i);
@@ -19,6 +19,9 @@ int Manacher(char *s) {
         }
         while (s[i-p[i]] == s[i+p[i]]) {
             p[i]++;
+        }
+        if (mx < p[i] + i)  {
+            mx = p[i] + i;  id = i;
         }
     }
     int ret = 0;
