@@ -1,10 +1,9 @@
 //递推，对MOD没有要求，预处理时间复杂度O(n^2)
 //C[n][m] = C (n, m) % MOD
 void init() {
-    C[0][0] = 1;
     for (int i=0; i<N; ++i) {
         C[i][0] = C[i][i] = 1;
-        for (int j=1; j<i; ++i) {
+        for (int j=1; j<i; ++j) {
             C[i][j] = C[i-1][j] + C[i-1][j-1];
             if (C[i][j] >= MOD) {
                 C[i][j] -= MOD;
