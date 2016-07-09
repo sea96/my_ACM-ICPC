@@ -1,3 +1,8 @@
+struct Matrix {
+    int row, col;
+    int arr[N][N];
+    Matrix(int r=0, int c=0) {
+        set_size (r, c);
         memset (arr, 0, sizeof (arr));
     }
     void set_size(int row, int col) {
