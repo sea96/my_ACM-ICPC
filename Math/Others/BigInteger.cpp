@@ -151,7 +151,6 @@ int main(void)  {
 
     return 0;
 }
-
 /*
     大数介乘求位数
     log10(n!) = log10(1*2*..*n) = log10(1) + log10(2) + ...+log10(n)
