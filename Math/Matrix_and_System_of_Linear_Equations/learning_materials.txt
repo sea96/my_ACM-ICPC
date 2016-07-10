@@ -1,0 +1,5 @@
+//常见矩阵
+http://www.cnblogs.com/pegasus/archive/2011/10/18/2121170.html
+
+//高斯消元法、高斯－若尔当消元法
+http://www.cnblogs.com/pegasus/archive/2011/10/18/2121170.html
