@@ -3,7 +3,7 @@ typedef double Matrix[N][N];
 //要求系数矩阵可逆
 //A是增广矩阵，A[i][n]是常数bi
 //运行结束后A[i]][n]对应第i个未知数的值
-void guass_elimination(Matrix A, int n) {
+void Guass_elimination(Matrix A, int n) {
     int i, j, k, r;
     //消元过程
     for (i=0; i<n; ++i) {
