@@ -19,16 +19,7 @@ void Guass_elimination(Matrix A, int n) {
                 std::swap (A[r][j], A[i][j]);
             }
         }
-        //与第i+1~n行进行消元
-        /*
-        for (k=i+1; k<n; ++k) {
-            double f = A[k][i] / A[i][i];
-            for (j=i; j<=n; ++j) {
-                A[k][j] -= f * A[i][j];
-            }
-        }
-        */
-        //逆序枚举消元
+        //与第i+1~n行进行逆序枚举消元
         for (j=n; j>=i; --j) {
             for (k=i+1; k<n; ++k) {
                 A[k][j] -= A[k][i] / A[i][i] * A[i][j];
