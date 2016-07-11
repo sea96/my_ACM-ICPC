@@ -1,6 +1,6 @@
 int mod;  //全局变量，矩阵乘法取模
 /*
-	*矩阵快速幂处理线性递推关系f(n)=a1f(n-1)+a2f(n-2)+...+adf(n-d)
+*矩阵快速幂处理线性递推关系f(n)=a1f(n-1)+a2f(n-2)+...+adf(n-d)
 */
 struct Matrix {
     int row, col;
