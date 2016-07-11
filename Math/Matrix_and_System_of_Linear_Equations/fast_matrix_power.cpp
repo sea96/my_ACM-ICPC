@@ -1,3 +1,4 @@
+int mod;  //全局变量，矩阵乘法取模
 /*
 	*矩阵快速幂处理线性递推关系f(n)=a1f(n-1)+a2f(n-2)+...+adf(n-d)
 */
@@ -19,15 +20,15 @@ struct Matrix {
         }
         return ret;
     }
-    void init(int n) {
+    void unit(int n) {
         row = col = n;
         for (int i=0; i<n; ++i) {
             arr[i][i] = 1;
         }
     }
 };
-Matrix operator ^ (Matrix X, ll n) {
-    Matrix ret; ret.init (X.col);
+Matrix operator ^ (Matrix X, int n) {
+    Matrix ret; ret.unit (X.col);
     while (n) {
         if (n & 1) {
             ret = ret * X;
