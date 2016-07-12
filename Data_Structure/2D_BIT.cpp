@@ -1,3 +1,9 @@
+/*
+    *BZOJ 1452 [JSOI2009]Count
+    *一个n*m的方格，初始时每个格子有一个权值，2种操作：
+    *1. 改变一个格子的权值；
+    *2. 求一个子矩阵某种特定权值出现的个数。
+*/
 //2D
 struct BIT {
     int c[105][N][N], n, m;
@@ -14,6 +20,7 @@ struct BIT {
             }
         }
     }
+    //query k(color)
     int query(int k, int x, int y) {
         int ret = 0;
         for (int i=x; i; i-=i&(-i)) {
