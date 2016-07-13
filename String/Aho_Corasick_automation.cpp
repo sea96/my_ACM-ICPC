@@ -7,7 +7,7 @@ struct AC {
     int end[NODE];
     int sz;
     
-    void clear() {
+    void initr() {
         memset (ch[0], 0, sizeof (ch[0]));
         end[0] = 0;
         sz = 1;
@@ -46,7 +46,9 @@ struct AC {
                 if (!u) {
                     ch[r][c] = ch[fail[r]][c];
                 } else {
-                    fail[u] = ch[fail[r]][c];
+                    int v = fail[r];
+                    while (v && !ch[v][c]) v = fail[v];
+                    fail[u] = ch[v][c];
                     last[u] = end[fail[u]] ? fail[u] : last[fail[u]];
                     que.push (u);
                 }
