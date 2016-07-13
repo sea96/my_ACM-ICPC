@@ -1,0 +1,4 @@
+//AC自动机讲解
+http://www.acyume.com/archives/19
+//AC自动机动画
+http://blog.ivank.net/aho-corasick-algorithm-in-as3.html
