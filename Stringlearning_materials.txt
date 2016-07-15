@@ -2,3 +2,6 @@
 http://www.acyume.com/archives/19
 //AC自动机动画
 http://blog.ivank.net/aho-corasick-algorithm-in-as3.html
+
+//最小表示法
+http://wenku.baidu.com/view/452cbcd528ea81c758f578ad.html
