@@ -5,10 +5,9 @@ void Dijkstra(int s) {
     std::priority_queue<Edge> pque;
     pque.push (Edge (s, d[s]));
     while (!pque.empty ()) {
-        int u = pque.top ().v; pque.pop ();
-        if (vis[u]) {
-            continue;
-        }
+        int u = pque.top ().v;
+        pque.pop ();
+        if (vis[u]) continue;
         vis[u] = true;
         for (int i=head[u]; ~i; i=edge[i].nex) {
             Edge &e = edge[i];
