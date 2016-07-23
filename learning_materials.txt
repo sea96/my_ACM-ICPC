@@ -11,3 +11,6 @@ http://www.cnblogs.com/iwtwiioi/p/3864075.html
 
 //树链剖分
 https://blog.anudeep2011.com/heavy-light-decomposition/
+
+//ZKW线段树 《统计的力量》
+http://wenku.baidu.com/view/0c1bbba40029bd64783e2cca.html
