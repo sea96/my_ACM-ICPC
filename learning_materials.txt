@@ -8,3 +8,6 @@ http://wenku.baidu.com/view/452cbcd528ea81c758f578ad.html
 
 //后缀数组代码详解
 http://www.cnblogs.com/iwtwiioi/p/3864075.html
+
+//树链剖分
+https://blog.anudeep2011.com/heavy-light-decomposition/
