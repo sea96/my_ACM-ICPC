@@ -1,5 +1,5 @@
 //UVA 11297
-struct Seg_Tree2D {
+struct Seg_Tree_2D {
     int mx[N<<2][N<<2], mn[N<<2][N<<2];
     int n, m;
     int xo, x1, y1, x2, y2, x, y, v;
