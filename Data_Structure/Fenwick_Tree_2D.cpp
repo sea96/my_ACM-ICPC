@@ -5,7 +5,7 @@
     *2. 求一个子矩阵某种特定权值出现的个数。
 */
 //2D
-struct BIT {
+struct Fenwick_Tree_2D {
     int c[105][N][N], n, m;
     void init(int n, int m) {
         memset (c, 0, sizeof (c));
