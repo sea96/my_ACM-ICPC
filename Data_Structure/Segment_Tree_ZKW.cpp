@@ -1,6 +1,7 @@
+//单点更新，区间查询
 struct ZKW {
-    int M;
     int sum[N<<2];
+    int M;
     void build(int n) {
         for (M=1; M<n+2; M<<=1);
         for (int i=1; i<=n; ++i) {
@@ -23,32 +24,4 @@ struct ZKW {
             sum[i] += v;
         }
     }
-}B, C;
-
-int main() {
-	B.modify (l, v);
-            C.modify (l, v * l);
-            if (r < n) {
-                B.modify (r + 1, -v);
-                C.modify (r + 1, -v*(r+1));
-            }
-	return 0;
-}
-    for (int i=1; i<=n; ++i) {
-        scanf ("%d", a+i);
-        A[i] = A[i-1] + a[i];
-    }
-    int l, r, v;
-    char op[2];
-    while (q--) {
-        scanf ("%s%d%d", op, &l, &r);
-        if (op[0] == 'Q') {
-            ll ans = A[r] - A[l-1];
-            ans += (r+1) * B.query (l, r) + (r-l+1) * B.query (1, l - 1);
-            ans -= C.query (l, r);
-            printf ("%I64d\n", ans);
-        } else {
-            scanf ("%d", &v);
-            
-        }
-    }
+};
