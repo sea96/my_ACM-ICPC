@@ -14,3 +14,7 @@ https://blog.anudeep2011.com/heavy-light-decomposition/
 
 //ZKW线段树 《统计的力量》
 http://wenku.baidu.com/view/0c1bbba40029bd64783e2cca.html
+
+//CDQ分治
+http://wenku.baidu.com/view/f3e37c56960590c69fc376bf.html?re=view
+http://zyk1997.github.io/2015/06/22/CDQ/
