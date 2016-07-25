@@ -1,4 +1,4 @@
-//快速读入输出
+//快速读入，输出
 inline void read(int &x) {
     char ch = getchar ();
     int f = 1; x = 0;
