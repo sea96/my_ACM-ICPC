@@ -13,10 +13,10 @@ struct Suffix_Array {
     void build_sa(int m = 128);
     void get_height();
 
+	void print();
+	
 	void RMQ_init();
     int RMQ_query(int l, int r);
-
-    void print();
 };
 
 //RMQ_query (rank[i], rank[j]);
@@ -29,6 +29,13 @@ int Suffix_Array::RMQ_query(int l, int r) {
     return std::min (dp[l][k], dp[r-(1<<k)+1][k]);
 }
 
+void Suffix_Array::print(char *str) {
+    puts ("/*Suffix*/");
+    for (int i=0; i<n; ++i) {
+        printf ("%s\n", str+sa[i]);
+    }
+}
+
 void Suffix_Array::RMQ_init() {
     for (int i=0; i<n; ++i) {
         dp[i][0] = height[i];
@@ -38,18 +45,6 @@ void Suffix_Array::RMQ_init() {
             dp[i][j] = std::min (dp[i][j-1], dp[i+(1<<(j-1))][j-1]);
         }
     }
-}
-
-void Suffix_Array::print() {
-    puts ("sa[] and height[]:");
-    for (int i=0; i<n; ++i) {
-        printf ("%2d ", sa[i]);
-    }
-    puts ("");
-    for (int i=0; i<n; ++i) {
-        printf ("%2d ", height[i]);
-    }
-    puts ("");
 }
 
 void Suffix_Array::init_str(char *str) {
