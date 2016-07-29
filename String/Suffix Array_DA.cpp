@@ -16,7 +16,7 @@ struct Suffix_Array {
 	void print();
 	
 	void RMQ_init();
-    int RMQ_query(int l, int r);
+	int RMQ_query(int l, int r);
 };
 
 //RMQ_query (rank[i], rank[j]);
