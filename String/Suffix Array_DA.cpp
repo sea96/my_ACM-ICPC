@@ -13,10 +13,10 @@ struct Suffix_Array {
     void build_sa(int m = 128);
     void get_height();
 
-	void print();
+    void print();
 	
-	void RMQ_init();
-	int RMQ_query(int l, int r);
+    void RMQ_init();
+    int RMQ_query(int l, int r);
 };
 
 //RMQ_query (rank[i], rank[j]);
