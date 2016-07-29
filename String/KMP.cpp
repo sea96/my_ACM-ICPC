@@ -13,7 +13,7 @@ void get_fail(char *P) {
     }
 }
 
-void KMP(char *T, char *P) {
+int KMP(char *T, char *P) {
     lenT = strlen (T);
     lenP = strlen (P);
     get_fail (P);
