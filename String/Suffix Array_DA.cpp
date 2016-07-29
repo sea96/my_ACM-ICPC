@@ -8,39 +8,16 @@ struct Suffix_Array {
     int n, len, s[N];
     int sa[N], rank[N], height[N];
     int tmp_one[N], tmp_two[N], c[N];
-    int dp[N][20];
     
     void init_str(char *str);
-    void build_sa(int m);
+    void build_sa(int m = 128);
     void get_height();
-    void print();
 
-    void RMQ_init();
+	void RMQ_init();
     int RMQ_query(int l, int r);
-    
-    int solve(char *str, int m);
+
+    void print();
 };
-
-void Suffix_Array::print() {
-    puts ("sa[] and height[]:");
-    for (int i=0; i<n; ++i) {
-        printf ("%2d ", sa[i]);
-    }
-    puts ("");
-    for (int i=0; i<n; ++i) {
-        printf ("%2d ", height[i]);
-    }
-    puts ("");
-}
-
-int Suffix_Array::solve(char *str, int m) {
-    init_str (str);
-    build_sa (28);  //a~z
-    get_height ();
-    //print ();
-    RMQ_init ();
-    //solve it!
-}
 
 //RMQ_query (rank[i], rank[j]);
 int Suffix_Array::RMQ_query(int l, int r) {
@@ -61,6 +38,18 @@ void Suffix_Array::RMQ_init() {
             dp[i][j] = std::min (dp[i][j-1], dp[i+(1<<(j-1))][j-1]);
         }
     }
+}
+
+void Suffix_Array::print() {
+    puts ("sa[] and height[]:");
+    for (int i=0; i<n; ++i) {
+        printf ("%2d ", sa[i]);
+    }
+    puts ("");
+    for (int i=0; i<n; ++i) {
+        printf ("%2d ", height[i]);
+    }
+    puts ("");
 }
 
 void Suffix_Array::init_str(char *str) {
@@ -102,5 +91,4 @@ void Suffix_Array::build_sa(int m) {
             x[sa[i]] = (y[sa[i-1]] == y[sa[i]] && y[sa[i-1]+j] == y[sa[i]+j] ? p - 1 : p++);
         }
     }
-} 
-
+}
