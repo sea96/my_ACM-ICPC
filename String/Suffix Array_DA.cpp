@@ -7,7 +7,7 @@
 struct Suffix_Array {
     int n, len, s[N];
     int sa[N], rank[N], height[N];
-    int tmp_one[N], tmp_two[N], c[30];
+    int tmp_one[N], tmp_two[N], c[N];
     int dp[N][20];
     
     void init_str(char *str);
