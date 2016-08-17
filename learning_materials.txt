@@ -18,3 +18,10 @@ http://wenku.baidu.com/view/0c1bbba40029bd64783e2cca.html
 //CDQ分治
 http://wenku.baidu.com/view/f3e37c56960590c69fc376bf.html?re=view
 http://zyk1997.github.io/2015/06/22/CDQ/
+
+//网络流-最大流
+http://www.renfei.org/blog/isap.html
+//二分图的最大匹配、完美匹配和匈牙利算法
+http://www.renfei.org/blog/bipartite-matching.html
+//带权最短路 Dijkstra, SPFA, Bellman-Ford, ASP, Floyd-Warshall 算法分析
+http://www.renfei.org/blog/weighted-shortest-path.html
