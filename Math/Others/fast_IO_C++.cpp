@@ -1,4 +1,4 @@
-//快速读入，输出，int long long double
+//int, long long, double
 template<class T>
 inline void read(T &x) {
     char ch = getchar ();
@@ -16,7 +16,7 @@ inline void read(T &x) {
 inline bool blank(char ch) {
     return ch==' ' || ch=='\n' || ch=='\r' || ch=='\t';
 }
-//char*
+//char *
 inline void read(char *s) {
     char ch = getchar ();
     for (; blank (ch); ch=getchar ());
