@@ -1,13 +1,6 @@
-//快速读入，输出
-inline void read(int &x) {
-    char ch = getchar ();
-    bool sign = false; x = 0;
-    for (; ch < '0' || ch > '9'; ch=getchar ()) if (ch == '-') sign = true;
-    for (; ch >= '0' && ch <= '9'; ch=getchar ()) x = x * 10 + (ch - '0');
-    if (sign) x = -x;
-}
-
-inline void read(double &x) {
+//快速读入，输出，int long long double
+template<class T>
+inline void read(T &x) {
     char ch = getchar ();
     bool sign = false; x = 0;
     for (; ch < '0' || ch > '9'; ch=getchar ()) if (ch == '-') sign = true;
@@ -23,7 +16,7 @@ inline void read(double &x) {
 inline bool blank(char ch) {
     return ch==' ' || ch=='\n' || ch=='\r' || ch=='\t';
 }
-
+//char*
 inline void read(char *s) {
     char ch = getchar ();
     for (; blank (ch); ch=getchar ());
