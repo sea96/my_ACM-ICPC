@@ -1,5 +1,5 @@
 /*
-	*点双连通分量，时间复杂度O(V+E)
+    *点双连通分量，时间复杂度O(V+E)
 */
 int dfn[N];
 std::vector<int> bcc[N];
