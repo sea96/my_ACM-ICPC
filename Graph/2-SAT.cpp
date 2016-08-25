@@ -42,3 +42,11 @@ struct Two_SAT {
         return true;
     }
 };
+//还有强连通判断的算法
+ bool judge() {
+     find_scc ();  //n*2
+     for (int i=0; i<n; ++i) {
+         if (scc_no[2*i] == scc_no[2*i+1]) return false;
+     }
+     return true;
+ }
