@@ -11,7 +11,7 @@ struct Suffix_Array {
     
     void init_str(char *str);
     void build_sa(int m = 128);
-    void get_height();
+    void calc_height();
 
     void print();
 	
@@ -56,7 +56,7 @@ void Suffix_Array::init_str(char *str) {
     s[n++] = 0;  //n = strlen (str) + 1
 }
 
-void Suffix_Array::get_height() {
+void Suffix_Array::calc_height() {
     for (int i=0; i<n; ++i) rank[sa[i]] = i;
     int k = height[0] = 0;
     for (int i=0; i<n-1; ++i) {
