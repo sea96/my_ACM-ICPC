@@ -4,8 +4,7 @@
 const double EPS = 1e-10;
 const double PI = acos (-1.0);
 int dcmp(double x) {  //三态函数，减少精度问题
-    if (fabs (x) < EPS) return 0;
-    else    return x < 0 ? -1 : 1;
+    return abs(x) < EPS ? 0 : x < 0 ? -1 : 1;
 }
 struct Point {  //点的定义
     double x, y;
@@ -200,13 +199,13 @@ bool point_on_left(Point p, Line L) {
     return cross (L.v, p - L.p) > 0;
 }
 
-struct Circle   {
+struct Circle {
     Point c;
     double r;
-    Circle () {}
-    Circle (Point c, double r) : c (c), r (r) {}
-    Point point(double a)   {
-        return Point (c.x + cos (a) * r, c.y + sin (a) * r);
+    Circle() {}
+    Circle(Point c, double r) : c(c), r(r) {}
+    Point point(double a) {
+        return Point(c.x+cos(a)*r, c.y+sin(a)*r);
     }
 };
 /*
@@ -232,7 +231,7 @@ int line_cir_inter(Line L, Circle C, double &t1, double &t2, vector<Point> &P)  
 /*
     两圆相交求交点，返回交点个数。交点保存在P中
 */
-int cir_cir_inter(Circle C1, Circle C2, vector<Point> &P)    {
+int cir_cir_inter_point(Circle C1, Circle C2, vector<Point> &P)    {
     double d = length (C1.c - C2.c);
     if (dcmp (d) == 0)  {
         if (dcmp (C1.r - C2.r) == 0)    return -1;      //两圆重叠
@@ -248,6 +247,25 @@ int cir_cir_inter(Circle C1, Circle C2, vector<Point> &P)    {
     else    P.push_back (p2);
     return 2;
 }
+//余弦定理，abc三条边，返回c边对应的角C的cos值
+double cosine(double a, double b, double c) {
+    return (squ(a)+squ(b)-squ(c)) / (2*a*b);
+}
+//两圆相交求相交面积，返回面积值
+double cir_cir_inter_area(Circle C1, Circle C2) {
+    double dist = sqrt(squ(C1.c.x-C2.c.x)+squ(C1.c.y-C2.c.y));
+    if (C1.r + C2.r < dist) return 0.0;  //相离
+    else if (dcmp(abs(C1.r-C2.r)-dist) >= 0) {  //内含
+        int r = C1.r < C2.r ? C1.r : C2.r;
+        return PI * r * r;
+    } else {  //相交
+        double ang1 = 2.0 * acos(cosine(C1.r, dist, C2.r));
+        double ang2 = 2.0 * acos(cosine(C2.r, dist, C1.r));
+        double ret = squ(C1.r)*ang1/2 + squ(C2.r)*ang2/2 - squ(C1.r)*sin(ang1)/2 - squ(C2.r)*sin(ang2)/2;  //面积容斥
+        return ret;
+    }
+}
+
 /*
     过点到圆的切线，返回切线条数，切线保存在V中
 */
