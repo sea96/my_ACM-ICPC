@@ -11,5 +11,5 @@ public void solve(int testNumber, InputReader in, PrintWriter out) {
       	x = x.divide(BigDecimal.valueOf(2), k+5, RoundingMode.HALF_UP);
       }
       x = x.setScale(k, BigDecimal.ROUND_DOWN);
-    	out.println(x);
+      out.println(x);
 }
