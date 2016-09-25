@@ -40,27 +40,25 @@ int LCA(int u, int v) {
 */
 void DFS(int u, int fa) {
     rt[u][0] = fa;
-    dep[u] = dep[fa] + 1;
-    for (int v: G[u]) {
+    for (int v: edge[u]) {
         if (v == fa) continue;
-        DFS (v, u);
+        dep[v] = dep[u] + 1;
+        DFS(v, u);
     }
 }
 
 void init_LCA() {
     for (int j=1; j<D; ++j) {
-        for (int i=1; i<=n; ++i) {
+        for (int i=0; i<n; ++i) {
             rt[i][j] = rt[i][j-1] == -1 ? -1 : rt[rt[i][j-1]][j-1];
         }
     }
 }
 
 int LCA(int u, int v) {
-    if (dep[u] < dep[v]) std::swap (u, v);
+    if (dep[u] < dep[v]) swap(u, v);
     for (int i=0; i<D; ++i) {
-        if ((dep[u] - dep[v]) >> i & 1) {
-            u = rt[u][i];
-        }
+        if ((dep[u] - dep[v]) >> i & 1) u = rt[u][i];
     }
     if (u == v) return u;
     for (int i=D-1; i>=0; --i) {
