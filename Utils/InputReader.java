@@ -20,7 +20,7 @@ public class ReadDemo  {
 
     static class Task {
         public void solve(int testNumber, InputReader in, PrintWriter out) {
-            // solve here
+            // solve here!
         }
     }
 
