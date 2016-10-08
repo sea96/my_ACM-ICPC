@@ -1,14 +1,10 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
 /*
-    *点，直线，圆的定义，相交问题，面积问题，凸包等等
-*/
+ *点，直线，圆的定义，相交问题，面积问题，凸包等等
+ */
 const double EPS = 1e-10;
 const double PI = acos(-1.0);
 
-int dcmp(double x) {  //三态函数，减少精度问题
+int sign(double x) {  //三态函数，减少精度问题
     return abs(x) < EPS ? 0 : x < 0 ? -1 : 1;
 }
 struct Point { //点的定义
@@ -30,7 +26,7 @@ struct Point { //点的定义
         return x < rhs.x || (x == rhs.x && y < rhs.y);
     }
     bool operator == (const Point &rhs) const {  //判断同一个点
-        return dcmp(x - rhs.x) == 0 && dcmp(y - rhs.y) == 0;
+        return sign(x - rhs.x) == 0 && sign(y - rhs.y) == 0;
     }
     void read() {
         scanf("%lf%lf", &x, &y);
@@ -79,21 +75,21 @@ Point point_line_proj(Point p, Point a, Point b) {  //点在直线上的投影�
 bool can_seg_seg_inter(Point a1, Point a2, Point b1, Point b2) {  //判断线段规范相交，两点式
     double c1 = cross(a2-a1, b1-a1), c2 = cross(a2-a1, b2-a1),
            c3 = cross(b2-b1, a1-b1), c4 = cross(b2-b1, a2-b1);  //线段a1a2是否与线段b1b2规范相交
-    return dcmp(c1)*dcmp(c2) < 0 && dcmp(c3)*dcmp(c4) < 0;  //若允许端点处相交，on_seg函数另外判断
+    return sign(c1)*sign(c2) < 0 && sign(c3)*sign(c4) < 0;  //若允许端点处相交，on_seg函数另外判断
 }
 bool on_seg(Point p, Point a, Point b) {  //判断点在线段上（不包含端点），两点式
-    return dcmp(cross(a-p, b-p)) == 0 && dcmp(dot(a-p, b-p)) < 0;  //点p是否在线段ab上
+    return sign(cross(a-p, b-p)) == 0 && sign(dot(a-p, b-p)) < 0;  //点p是否在线段ab上
 }
 double point_to_seg(Point p, Point a, Point b) {  //点到线段的距离，两点式
     if (a == b) return length(p - a);
     Vector V1 = b - a, V2 = p - a, V3 = p - b;  //点p到线段ab的距离
-    if (dcmp(dot(V1, V2)) < 0) return length(V2);  //|pa|
-    else if (dcmp(dot(V1, V3)) > 0) return length(V3);  //|pb|
+    if (sign(dot(V1, V2)) < 0) return length(V2);  //|pa|
+    else if (sign(dot(V1, V3)) > 0) return length(V3);  //|pb|
     else return fabs(cross(V1, V2)) / length(V1);
 }
 bool can_line_seg_inter(Point a1, Point a2, Point b1, Point b2) {  //判断直线与线段相交（不包含端点），两点式
     double c1 = cross(a2-a1, b1-a1), c2 = cross(a2-a1, b2-a1);
-    return dcmp(c1*c2) < 0;  //直线a1a2是否与线段b1b2相交，若允许线段端点处相交，改为<=
+    return sign(c1*c2) < 0;  //直线a1a2是否与线段b1b2相交，若允许线段端点处相交，改为<=
 }
 double area_triangle(Point a, Point b, Point c) {  //三角形面积，叉积
     return fabs(cross(b-a, c-a)) / 2.0;
@@ -116,8 +112,8 @@ Polygon cut_polygon(Polygon &poly, Point a, Point b) {
     for (int i=0; i<n; ++i) {
         Point &c = poly[i];
         Point &d = poly[(i+1)%n];
-        if (dcmp(cross(b-a, c-a)) >= 0) npoly.push_back(c);
-        if (dcmp(cross(b-a, c-d)) != 0) {
+        if (sign(cross(b-a, c-a)) >= 0) npoly.push_back(c);
+        if (sign(cross(b-a, c-d)) != 0) {
             Point ip = line_line_inter(a, b-a, c, d-c);
             if (on_seg(ip, c, d)) npoly.push_back(ip);
         }
@@ -125,17 +121,17 @@ Polygon cut_polygon(Polygon &poly, Point a, Point b) {
     return npoly;  //如果退化，可能返回单点或线段
 }
 /*
-    *判断点在多边形内，多边形可以为凹多边形甚至可以自交
-    *凸多边形只需用叉积判断是否所有边在左边即可
-*/
+ *判断点在多边形内，多边形可以为凹多边形甚至可以自交
+ *凸多边形只需用叉积判断是否所有边在左边即可
+ */
 int point_in_polygon(Point p, Polygon &poly) {
     int wn = 0;
     int n = poly.size();
     for (int i=0; i<n; ++i) {
         if (on_seg(p, poly[i], poly[(i+1)%n]) || p == poly[i] || p == poly[(i+1)%n]) return -1;  //在多边形上
-        int k = dcmp(cross(poly[(i+1)%n]-poly[i], p-poly[i]));
-        int d1 = dcmp(poly[i].y-p.y);
-        int d2 = dcmp(poly[(i+1)%n].y-p.y);
+        int k = sign(cross(poly[(i+1)%n]-poly[i], p-poly[i]));
+        int d1 = sign(poly[i].y-p.y);
+        int d2 = sign(poly[(i+1)%n].y-p.y);
         if (k > 0 && d1 <= 0 && d2 > 0) wn++;
         if (k < 0 && d1 > 0 && d2 <= 0) wn--;
     }
@@ -143,10 +139,10 @@ int point_in_polygon(Point p, Polygon &poly) {
     else return 0;  //外部
 }
 /*
-    *凸包，基于水平序的Andrew算法。输入点的集合，返回凸包点的集合。
-    *凸包边上无点：<=；凸包边上有点：<
-    *时间复杂度O(NlogN)
-*/
+ *凸包，基于水平序的Andrew算法。输入点的集合，返回凸包点的集合。
+ *凸包边上无点：<=；凸包边上有点：<
+ *时间复杂度O(NlogN)
+ */
 Polygon convex_hull(Polygon P) {
     sort(P.begin(), P.end());  //排序
     P.erase(unique(P.begin(), P.end()), P.end());  //删除重复点
@@ -181,9 +177,9 @@ struct Line {  //有向直线的定义，左边就是对应的半平面
 };
 
 /*
-    *半平面交，输入直线集，返回凸多边形的点集，如果不存在返回的是空集
-    *时间复杂度O(NlogN)
-*/
+ *半平面交，输入直线集，返回凸多边形的点集，如果不存在返回的是空集
+ *时间复杂度O(NlogN)
+ */
 bool point_on_left(Point p, Line L) {  //判断点在直线左侧
     return cross(L.v, p-L.p) > 0;
 }
@@ -198,7 +194,7 @@ Polygon half_plane_inter(vector<Line> L) {
         while (first < last && !point_on_left(p[last-1], L[i])) last--;
         while (first < last && !point_on_left(p[first], L[i])) first++;
         q[++last] = L[i];
-        if (dcmp(cross(q[last].v, q[last-1].v)) == 0) {
+        if (sign(cross(q[last].v, q[last-1].v)) == 0) {
             last--;
             if (point_on_left(L[i].p, q[last])) q[last] = L[i];
         }
@@ -230,8 +226,8 @@ int line_cir_inter(Line L, Circle C, double &t1, double &t2, vector<Point> &P) {
     double delta = f*f-4.0*e*g;  //判别式
     //以上参数的具体含义参见《训练指南》P264
     //交点p1=L.p+L.v*t1，交点p2=L.p+L.v*t2
-    if (dcmp(delta) < 0) return 0;  //相离
-    if (dcmp(delta) == 0) {  //相切
+    if (sign(delta) < 0) return 0;  //相离
+    if (sign(delta) == 0) {  //相切
         t1 = t2 = -f / (2.0*e);
         P.push_back(L.point(t1));
         return 1;
@@ -240,20 +236,20 @@ int line_cir_inter(Line L, Circle C, double &t1, double &t2, vector<Point> &P) {
     t1 = (-f-sqrt(delta)) / (2.0*e);
     t2 = (-f+sqrt(delta)) / (2.0*e);
     if (t1 > t2) swap (t1, t2);
-    if (dcmp(t1) > 0 && dcmp(t1-1.0) < 0) P.push_back(L.point(t1));
-    if (dcmp(t2) > 0 && dcmp(t2-1.0) < 0) P.push_back(L.point(t2));
+    if (sign(t1) > 0 && sign(t1-1.0) < 0) P.push_back(L.point(t1));
+    if (sign(t2) > 0 && sign(t2-1.0) < 0) P.push_back(L.point(t2));
     return 2;
 }
 
 //两圆相交求交点，返回交点个数，交点保存在P中
 int cir_cir_inter_point(Circle C1, Circle C2, vector<Point> &P) {
     double d = length(C1.c - C2.c);
-    if (dcmp(d) == 0) {  //同心圆
-        if (dcmp(C1.r-C2.r) == 0) return -1;  //两圆重合
+    if (sign(d) == 0) {  //同心圆
+        if (sign(C1.r-C2.r) == 0) return -1;  //两圆重合
         else return 0;
     }
-    if (dcmp(C1.r+C2.r-d) < 0) return 0; //外离
-    if (dcmp(fabs(C1.r-C2.r)-d) < 0) return 0;  //内含
+    if (sign(C1.r+C2.r-d) < 0) return 0; //外离
+    if (sign(fabs(C1.r-C2.r)-d) < 0) return 0;  //内含
     double a = polar_angle(C2.c - C1.c);
     double da = acos((C1.r*C1.r+d*d-C2.r*C2.r) / (2*C1.r*d));  //C1C2到C1P1的角？
     Point p1 = C1.point(a - da), p2 = C2.point(a + da);
@@ -276,7 +272,7 @@ double cosine(double a, double b, double c) {  //输入三角形的三条边，�
 double cir_cir_inter_area(Circle C1, Circle C2) {
     double dist = distance(C1.c, C2.c);
     if (C1.r + C2.r < dist) return 0.0;  //相离
-    else if (dcmp(abs(C1.r-C2.r)-dist) >= 0) {  //内含
+    else if (sign(abs(C1.r-C2.r)-dist) >= 0) {  //内含
         int r = C1.r < C2.r ? C1.r : C2.r;
         return PI*r*r;
     } else {  //相交
@@ -292,7 +288,7 @@ int point_cir_tan(Point p, Circle C, Vector* V) {
     Vector u = C.c - p;
     double dis = length(u);
     if (dis < C.r) return 0;  //点在圆内
-    else if (dcmp(dis-C.r) == 0) {  //点在圆上
+    else if (sign(dis-C.r) == 0) {  //点在圆上
         V[0] = rotate(u, PI/2);
         return 1;
     } else {  //点在圆外
@@ -310,10 +306,10 @@ int cir_cir_tan(Circle A, Circle B, Point* a, Point* b) {
     }
     double d = dot(A.c-B.c, A.c-B.c);
     double rsub = A.r-B.r, rsum = A.r+B.r;
-    if (dcmp(d-rsub) < 0) return 0; //内含，零条公切线
+    if (sign(d-rsub) < 0) return 0; //内含，零条公切线
     double base = polar_angle(B.c - A.c);
-    if (dcmp(d) == 0 && dcmp(A.r-B.r) == 0) return -1; //两圆重合，无数条公切线
-    if (dcmp(d-rsub) == 0) {  //内切，一条公切线
+    if (sign(d) == 0 && sign(A.r-B.r) == 0) return -1; //两圆重合，无数条公切线
+    if (sign(d-rsub) == 0) {  //内切，一条公切线
         a[0] = A.point(base); b[0] = B.point(base);
         return 1;
     }
@@ -324,7 +320,7 @@ int cir_cir_tan(Circle A, Circle B, Point* a, Point* b) {
     a[cnt] = A.point(base-ang); b[cnt] = B.point(base-ang); cnt++;
     if (d == rsum) {  //一条内公切线
         a[cnt] = A.point (base); b[cnt] = B.point(base + PI); cnt++;
-    } else if (dcmp (d-rsum) > 0) {  //两条内公切线
+    } else if (sign (d-rsum) > 0) {  //两条内公切线
         double ang2 = acos(rsum / d);
         a[cnt] = A.point(base+ang2); b[cnt] = B.point(base+ang2+PI); cnt++;
         a[cnt] = A.point(base-ang2); b[cnt] = B.point(base-ang2+PI); cnt++;
@@ -332,21 +328,21 @@ int cir_cir_tan(Circle A, Circle B, Point* a, Point* b) {
     return cnt;
 }
 /*
-    多边形与圆的公共面积，上交红书模板
-    调用fabs (cir_poly_area (ps))，ps为多边形的点集，
-    需要用到line_cir_inter ()函数，圆心在原点(可平移)
-*/
+   多边形与圆的公共面积，上交红书模板
+   调用fabs (cir_poly_area (ps))，ps为多边形的点集，
+   需要用到line_cir_inter ()函数，圆心在原点(可平移)
+ */
 double sector_area(Point a, Point b, double r)    {     //三角剖分，求扇形面积
     double theta = polar_angle (a) - polar_angle (b);
-    while (dcmp (theta) <= 0)   theta += 2 * PI;
+    while (sign (theta) <= 0)   theta += 2 * PI;
     while (theta > 2 * PI)  theta -= 2 * PI;
     theta = min (theta, 2 * PI - theta);
     return r * r * theta / 2;
 }
 double cal(Point a, Point b, double r)    {
     double t1, t2;
-    bool ina = dcmp (length (a) - r) < 0;
-    bool inb = dcmp (length (b) - r) < 0;
+    bool ina = sign (length (a) - r) < 0;
+    bool inb = sign (length (b) - r) < 0;
     if (ina && inb) return fabs (cross (a, b)) / 2.0;
     vector<Point> p;
     int num = line_cir_inter (Line (a, b - a), Circle (Point (0, 0), r), t1, t2, p);
@@ -358,7 +354,7 @@ double cal(Point a, Point b, double r)    {
 double cir_poly_area(vector<Point> &ps, double r)  {
     double ret = 0;
     for (int i=0; i<ps.size ()-1; ++i) {        //多边形最后放入ps[0]起点
-        int sgn = dcmp (cross (ps[i], ps[i+1]));
+        int sgn = sign (cross (ps[i], ps[i+1]));
         if (sgn != 0)   {
             ret += sgn * cal (ps[i], ps[i+1], r);
         }
@@ -366,53 +362,25 @@ double cir_poly_area(vector<Point> &ps, double r)  {
     return ret;
 }
 /*
-	*最近点对问题，分治法，先按照x坐标排序，求解(left, mid)和(mid+1, right)范围的最小值，
-	*然后类似区间合并，分离mid左右的点也求最小值
-*/
-/*
+ *最近点对问题，分治法，先按照x坐标排序，求解(left, mid)和(mid+1, right)范围的最小值，
+ *然后类似区间合并，分离mid左右的点也求最小值
+ */
 double min_dist(int left, int right) {
-    if (left == right) {
-        return INF;
-    }
-    else if (right - left == 1) {
-        return get_dist (point[left], point[right]);
-    } else {
+    if (left == right) return INF;
+    else if (right - left == 1) return get_dist(point[left], point[right]);
+    else {
         int mid = left + right >> 1;
-        double ret = std::min (min_dist (left, mid), min_dist (mid + 1, right));
-        if (ret == 0) {
-            return ret;
-        }
+        double ret = min(min_dist(left, mid), min_dist(mid + 1, right));
+        if (ret == 0) return ret;
         int endy = 0;
-        for (int i=mid; i>=left&&point[mid].x-point[i].x<=ret; --i) {
-            idy[endy++] = i;
-        }
-        for (int i=mid+1; i<=right&&point[i].x-point[mid+1].x<=ret; ++i) {
-            idy[endy++] = i;
-        }
-        std::sort (idy, idy+endy, cmp_y);  //return point[i].y < point[j].y;
+        for (int i=mid; i>=left&&point[mid].x-point[i].x<=ret; --i) idy[endy++] = i;
+        for (int i=mid+1; i<=right&&point[i].x-point[mid+1].x<=ret; ++i) idy[endy++] = i;
+        sort (idy, idy+endy, cmp_y);  //return point[i].y < point[j].y;
         for (int i=0; i<endy; ++i) {
             for (int j=i+1; j<endy&&point[j].y-point[i].y<ret; ++j) {
-                ret = std::min (ret, get_dist (point[i], point[j]));
+                ret = min(ret, get_dist(point[i], point[j]));
             }
         }
         return ret;
     }
-}
-*/
-int main() {
-    Polygon poly;
-    poly.push_back(Point(1, 1));
-    poly.push_back(Point(-1, 1));
-    poly.push_back(Point(-1, -1));
-    poly.push_back(Point(1, -1));
-    poly.push_back(Point(1, 0));
-    poly.push_back(Point(0, 0));
-
-    Polygon convex_poly = convex_hull(poly);
-
-    for (auto p: convex_poly) {
-        p.print();
-    }
-
-    return 0;
 }
