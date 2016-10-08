@@ -1,0 +1,83 @@
+Graph Theory
+	2-SAT
+	Articulation/Bridge/Biconnected Component
+	Cycles/Topological Sorting/Strongly Connected Component
+	Shortest Path
+		Bellman Ford
+		Dijkstra/Floyd Warshall
+	Euler Trail/Circuit
+	Heavy-Light Decomposition
+	Minimum Spanning Tree
+	Stable Marriage Problem
+	Trees
+	Directed Minimum Spanning Tree
+	Flow/Matching
+		Graph Matching
+			Bipartite Matching
+			Hopcroft–Karp Bipartite Matching
+			Weighted Bipartite Matching/Hungarian Algorithm
+		Flow
+			Max Flow/Min Cut
+			Min Cost Max Flow
+DFS-like
+	Backtracking with Pruning/Branch and Bound
+	Basic Recursion
+	IDA* Search
+	Parsing/Grammar
+	Breadth First Search/Depth First Search
+	Advanced Search Techniques
+		Binary Search/Bisection
+		Ternary Search
+Geometry
+	Basic Geometry
+	Computational Geometry
+	Convex Hull
+	Pick's Theorem
+Game Theory
+	Green Hackenbush/Colon Principle/Fusion Principle
+	Nim
+	Sprague-Grundy Number
+Matrix
+	Gaussian Elimination
+	Matrix Exponentiation
+Data Structures
+	Basic Data Structures
+	Binary Indexed Tree
+	Binary Search Tree
+	Hashing
+	Orthogonal Range Search
+	Range Minimum Query/Lowest Common Ancestor
+	Segment Tree/Interval Tree
+	Trie Tree
+	Sorting
+	Disjoint Set
+String
+	Aho Corasick
+	Knuth-Morris-Pratt
+	Suffix Array/Suffix Tree
+Math
+	Basic Math
+	Big Integer Arithmetic
+	Number Theory
+		Chinese Remainder Theorem
+		Extended Euclid
+		Inclusion/Exclusion
+		Modular Arithmetic
+	Combinatorics
+		Group Theory/Burnside's lemma
+		Counting
+	Probability/Expected Value
+Others
+	Tricky
+	Hardest
+	Unusual
+	Brute Force
+	Implementation
+	Constructive Algorithms
+	Two Pointer
+	Bitmask
+	Beginner
+	Discrete Logarithm/Shank's Baby-step Giant-step Algorithm
+	Greedy
+	Divide and Conquer
+Dynamic Programming
