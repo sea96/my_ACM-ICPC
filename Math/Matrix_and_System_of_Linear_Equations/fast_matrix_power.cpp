@@ -10,7 +10,7 @@ Mat matrix_mul(const Mat &A, const Mat &B) {
     for (int i=0; i<A.size(); ++i)
         for (int j=0; j<B[0].size(); ++j)
             for (int k=0; k<A[0].size(); ++k)
-                ret[i][j] = (ret[i][j] + (ll)A[i][k]*B[k][j]%MOD) % MOD;
+                ret[i][j] = (ret[i][j] + (ll)A[i][k]*B[k][j]%MOD) % MOD;  //可优化
     return ret;
 }
 
