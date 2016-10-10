@@ -234,6 +234,7 @@ int line_cir_inter(Line L, Circle C, double &t1, double &t2) {
     //相交
     t1 = (-f-sqrt(delta)) / (2.0*e);
     t2 = (-f+sqrt(delta)) / (2.0*e);
+    if(t1 > t2) swap(t1, t2);
     return 2;
 }
 
