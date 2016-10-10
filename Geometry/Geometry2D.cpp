@@ -219,8 +219,8 @@ struct Circle {  //圆的定义
     }
 };
 
-//直线与圆相交求交点，返回交点个数，交点保存在P中
-int line_cir_inter(Line L, Circle C, double &t1, double &t2, vector<Point> &P) {
+//直线与圆相交求交点，返回交点个数，交点为L.point(t1/t2)
+int line_cir_inter(Line L, Circle C, double &t1, double &t2) {
     double a = L.v.x, b = L.p.x-C.c.x, c = L.v.y, d = L.p.y-C.c.y;
     double e = a*a+c*c, f = 2.0*(a*b+c*d), g = b*b+d*d-C.r*C.r;
     double delta = f*f-4.0*e*g;  //判别式
@@ -229,15 +229,11 @@ int line_cir_inter(Line L, Circle C, double &t1, double &t2, vector<Point> &P) {
     if (sign(delta) < 0) return 0;  //相离
     if (sign(delta) == 0) {  //相切
         t1 = t2 = -f / (2.0*e);
-        P.push_back(L.point(t1));
         return 1;
     }
     //相交
     t1 = (-f-sqrt(delta)) / (2.0*e);
     t2 = (-f+sqrt(delta)) / (2.0*e);
-    if (t1 > t2) swap (t1, t2);
-    if (sign(t1) > 0 && sign(t1-1.0) < 0) P.push_back(L.point(t1));
-    if (sign(t2) > 0 && sign(t2-1.0) < 0) P.push_back(L.point(t2));
     return 2;
 }
 
