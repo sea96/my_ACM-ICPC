@@ -219,7 +219,7 @@ struct Circle {  //圆的定义
     }
 };
 
-//直线与圆相交求交点，返回交点个数，交点为L.point(t1/t2)
+//直线与圆相交求交点，返回交点个数，交点为L.point(t)
 int line_cir_inter(Line L, Circle C, double &t1, double &t2) {
     double a = L.v.x, b = L.p.x-C.c.x, c = L.v.y, d = L.p.y-C.c.y;
     double e = a*a+c*c, f = 2.0*(a*b+c*d), g = b*b+d*d-C.r*C.r;
