@@ -9,7 +9,7 @@ int sign(double x) {  //三态函数，减少精度问题
 }
 struct Point { //点的定义
     double x, y;
-    Point(double x=0.0, double y=0.0) : x (x), y(y) {}
+    Point(double x=0.0, double y=0.0) : x(x), y(y) {}
     Point operator + (const Point &rhs) const {  //向量加法
         return Point(x + rhs.x, y + rhs.y);
     }
