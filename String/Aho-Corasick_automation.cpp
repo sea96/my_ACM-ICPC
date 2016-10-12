@@ -18,7 +18,7 @@ void AC::init() {
 }
 
 int AC::idx(char c) {
-	return c - 'a';
+    return c - 'a';
 }
 
 void AC::insert(char *s) {
@@ -52,7 +52,7 @@ void AC::get_fail() {
         for (int c=0; c<SIZE; ++c) {
             int &u = ch[r][c];
             if (!u) {
-            	//一视同仁，把不存在的边补上，但并不保证转移有效
+                //一视同仁，把不存在的边补上，但并不保证转移有效
                 u = ch[fail[r]][c];
             } else {
                 int v = fail[r];
