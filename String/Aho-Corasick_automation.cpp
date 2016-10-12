@@ -12,7 +12,7 @@ struct AC {
 }ac;
 
 void AC::init() {
-    memset (ch[0], 0, sizeof (ch[0]));
+    memset(ch[0], 0, sizeof (ch[0]));
     end[0] = 0;
     sz = 1;
 }
@@ -24,9 +24,9 @@ int AC::idx(char c) {
 void AC::insert(char *s) {
     int u = 0;
     for (int c, i=0; s[i]; ++i) {
-        c = idx (s[i]);
+        c = idx(s[i]);
         if (!ch[u][c]) {
-            memset (ch[sz], 0, sizeof (ch[sz]));
+            memset(ch[sz], 0, sizeof (ch[sz]));
             end[sz] = 0;
             ch[u][c] = sz++;
         }
@@ -37,7 +37,7 @@ void AC::insert(char *s) {
 
 void AC::get_fail() {
     fail[0] = last[0] = 0;
-    std::queue<int> que;
+    queue<int> que;
     for (int c=0; c<SIZE; ++c) {
         int u = ch[0][c];
         if (u) {
