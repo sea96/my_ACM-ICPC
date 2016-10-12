@@ -14,10 +14,3 @@ void quick_sort(int *a, int l, int r)   {
         quick_sort (a, i+1, r);
     }
 }
-/*
-   srand (time (NULL));
-   clock_t begin = clock ();
-   quick_sort (a, 0, 10000000);
-   clock_t end = clock ();
-   printf ("%.2fMS\n", (double) (end - begin) * 1000 / CLOCKS_PER_SEC);
-*/
