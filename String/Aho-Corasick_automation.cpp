@@ -43,12 +43,12 @@ void AC::get_fail() {
         if (u) {
             fail[u] = 0;
             last[u] = 0;
-            que.push (u);
+            que.push(u);
         }
     }
     while (!que.empty ()) {
-        int r = que.front ();
-        que.pop ();
+        int r = que.front();
+        que.pop();
         for (int c=0; c<SIZE; ++c) {
             int &u = ch[r][c];
             if (!u) {
@@ -60,7 +60,7 @@ void AC::get_fail() {
                 fail[u] = ch[v][c];  //找到“备胎”的位置（也不保证有）
                 end[u] |= end[fail[u]];  //提高效率，是否存在匹配的模板串
                 last[u] = end[fail[u]] ? fail[u] : last[fail[u]];  //找“备胎”中下一个结点
-                que.push (u);
+                que.push(u);
             }
         }
     }
