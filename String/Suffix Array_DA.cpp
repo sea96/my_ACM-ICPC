@@ -1,33 +1,23 @@
 /*
-    *后缀数组，倍增算法实现，复杂度O(nlogn)
-    *sa[i]: 第i小的后缀是在字符串位置，即后缀sa[i]
-    *rank[i]: 后缀i在sa数组下标，即第rank[i]小
-    *height[i]: LCP (suffix (sa[i-1], sa[i]))
-*/
+ *后缀数组，倍增算法实现，复杂度O(nlogn)
+ *sa[i]: 第i小的后缀是在字符串位置，即后缀sa[i]
+ *rank[i]: 后缀i在sa数组下标，即第rank[i]小
+ *height[i]: LCP(suffix(sa[i-1], sa[i]))
+ */
 struct Suffix_Array {
     int n, len, s[N];
     int sa[N], rank[N], height[N];
     int tmp_one[N], tmp_two[N], c[N];
-    
+
     void init_str(char *str);
     void build_sa(int m = 128);
     void calc_height();
 
     void print(char *str);
-	
+
     void RMQ_init();
     int RMQ_query(int l, int r);
 };
-
-//RMQ_query (rank[i], rank[j]);
-int Suffix_Array::RMQ_query(int l, int r) {
-    if (l > r) {
-        std::swap (l, r);
-    }
-    l++;
-    int k = 0; while (1<<(k+1) <= r - l + 1) k++;
-    return std::min (dp[l][k], dp[r-(1<<k)+1][k]);
-}
 
 void Suffix_Array::print(char *str) {
     puts ("/*Suffix*/");
@@ -36,10 +26,16 @@ void Suffix_Array::print(char *str) {
     }
 }
 
+//LCP(suffix(i), suffix(j))=RMQ_query(rank[i], rank[j]);
+int Suffix_Array::RMQ_query(int l, int r) {
+    if (l > r) swap(l, r);
+    l++;
+    int k = 0; while (1<<(k+1) <= r - l + 1) k++;
+    return min(dp[l][k], dp[r-(1<<k)+1][k]);
+}
+
 void Suffix_Array::RMQ_init() {
-    for (int i=0; i<n; ++i) {
-        dp[i][0] = height[i];
-    }
+    for (int i=0; i<n; ++i) dp[i][0] = height[i];
     for (int j=1; (1<<j)<=n; ++j) {
         for (int i=0; i+(1<<j)-1<n; ++i) {
             dp[i][j] = std::min (dp[i][j-1], dp[i+(1<<(j-1))][j-1]);
@@ -49,11 +45,11 @@ void Suffix_Array::RMQ_init() {
 
 void Suffix_Array::init_str(char *str) {
     n = 0;
-    len = strlen (str);
+    len = strlen(str);
     for (int i=0; i<len; ++i) {
         s[n++] = str[i] - 'a' + 1;
     }
-    s[n++] = 0;  //n = strlen (str) + 1
+    s[n++] = 0;  //n = strlen(str) + 1
 }
 
 void Suffix_Array::calc_height() {
@@ -67,7 +63,7 @@ void Suffix_Array::calc_height() {
     }
 }
 
-//m = max (r[i]) + 1，一般字符128足够了
+//m = max(r[i]) + 1，一般字符128足够了
 void Suffix_Array::build_sa(int m) {
     int i, j, p, *x = tmp_one, *y = tmp_two;
     for (i=0; i<m; ++i) c[i] = 0;
