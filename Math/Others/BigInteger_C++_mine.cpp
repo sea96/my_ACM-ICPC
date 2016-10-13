@@ -1,11 +1,7 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef long long ll;
 /*
-    *支持大数加减乘除（取余）四则运算，支持小数加减乘除（取余）运算
-    *支持大数之间比较大小，（大数与小数的比较将小数转大数）
-*/
+ *支持大数加减乘除（取余）四则运算，支持小数加减乘除（取余）运算
+ *支持大数之间比较大小，（大数与小数的比较将小数转大数）
+ */
 struct BigInteger {
     static const int BASE = 100000000;  //一亿进制（10^8），即每位0~99999999的数
     static const int DIGIT = 8;  //每位的长度
@@ -33,7 +29,7 @@ struct BigInteger {
         }
         return *this;
     }
-    
+
     //大数与大数的四则运算
     BigInteger operator + (const BigInteger &rhs) const {
         BigInteger ret;
@@ -94,7 +90,7 @@ struct BigInteger {
         while (a.len > 1 && !a.s[a.len]) a.len--;
         return make_pair (a, b);
     }
-    
+
     //大数与小数的四则运算
     BigInteger operator + (const int rhs) const {BigInteger tmp; tmp=rhs; return *this+tmp; }
     BigInteger operator - (const int rhs) const {BigInteger tmp; tmp=rhs; return *this-tmp; }
@@ -147,22 +143,4 @@ ostream& operator << (ostream &out, const BigInteger &x) {
     printf ("%d", x.s[x.len]);
     for (int i=x.len-1; i>=1; --i) printf ("%08d", x.s[i]);
     return out;
-}
-
-int main() {
-    BigInteger a, b;
-    while (cin >> a >> b) {
-        cout << a << " + " << b << " = " << a+b << '\n';  //a + b
-        cout << a << " - " << b << " = " << a-b << '\n';  //a - b(a >= b)
-        cout << a << " * " << b << " = " << a*b << '\n';  //a * b
-        pair<BigInteger, BigInteger> c = a / b;
-        cout << a << " / " << b << " = " << c.first << '\n';  //a / b
-        cout << a << " % " << b << " = " << c.second << "(bign)" << '\n';  //a % b
-        cout << a << (a<b ? " < " : (a>b ? " > " : " == ")) << b << '\n';  //a ? b
-        
-        int d;
-        scanf ("%d", &d);
-        cout << a << " % " << d << " = " << a % d << "(int)" << '\n';  //a % d
-    }
-    return 0;
 }
