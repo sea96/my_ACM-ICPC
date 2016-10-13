@@ -1,12 +1,12 @@
 /*
-    *2-SAT，暴力判断，注意从0开始
-*/
+ *2SAT，暴力判断，注意从0开始
+ */
 struct Two_SAT {
     int n;
     std::vector<int> edge[N<<1];
     bool mark[N<<1];
     int sta[N<<1], top;
-    
+
     void init(int n) {
         this->n = n;
         for (int i=0; i<=n*2; ++i) edge[i].clear ();
@@ -43,10 +43,10 @@ struct Two_SAT {
     }
 };
 //还有强连通判断的算法
- bool judge() {
-     find_scc ();  //n*2
-     for (int i=0; i<n; ++i) {
-         if (scc_no[2*i] == scc_no[2*i+1]) return false;
-     }
-     return true;
- }
+bool judge() {
+    find_scc ();  //n*2
+    for (int i=0; i<n; ++i) {
+        if (scc_no[2*i] == scc_no[2*i+1]) return false;
+    }
+    return true;
+}
