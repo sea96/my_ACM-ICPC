@@ -46,34 +46,29 @@ bool is_prime(int x)   {
     return x != 1;
 }
 /*
- *素性测试，Miller_Rabin 随机算法
- *可以判断< 2^63的数
- 以a为基,n-1=x*2^t，a^(n-1) = 1(mod n)  验证n是不是素数
- *返回true：素数；false：合数
+ *素性测试，Miller_Rabin 测试算法
+ *if n < 3,215,031,751, just test a = 2, 3, 5, and 7;
+ *if n < 4,759,123,141, just test a = 2, 7, and 61;
+ *if n < 1,122,004,669,633, just test a = 2, 13, 23, and 1662803;
+ *if n < 2,152,302,898,747, just test a = 2, 3, 5, 7, and 11;
+ *if n < 3,474,749,660,383, just test a = 2, 3, 5, 7, 11, and 13;
+ *if n < 341,550,071,728,321, just test a = 2, 3, 5, 7, 11, 13, and 17.
+ *if n < 3,825,123,056,546,413,051, just test a = 2, 3, 5, 7, 11, 13, 17, 19, and 23.
+ *if n < 18,446,744,073,709,551,616 = 2^64, just test a = 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, and 37.
  */
-bool Miller_Rabin(ll n) {
-    if (n == 2) return true;
-    if (n < 2 || ! (n & 1))  return false;  //偶数或1
-    ll x = n - 1;   int t = 0;
-    while (! (x & 1)) {
-        x >>= 1;  t++;
+bool test(ll x, ll n) {
+    ll m = n - 1;
+    while (!(m&1)) m >>= 1;
+    x = pow_mod(x, m, n);
+    for (; m<n-1 && x!=1 && x!=n-1; m<<=1) {
+        x = mul_mod(x, x, n);
     }
-    for (int i=1; i<=S; ++i) {  //srand (time (NULL)); S=20
-        ll a = rand () % (n - 1) + 1;  //需要cstdlib，ctime头文件
-        if (check (a, n, x, t)) return false;  //合数
-    }
-    return true;
+    return x == n-1 || (m&1) == 1;
 }
-bool check(ll a, ll n, ll x, int t) {
-    ll ret = pow_mod (a, x, n);
-    ll last = ret;
-    for (int i=1; i<=t; ++i) {
-        ret = multi_mod (ret, ret, n);
-        if (ret == 1 && last != 1 && last != n - 1) return true;  //合数
-        last = ret;
-    }
-    if (ret != 1)   return true;
-    return false;
+bool Miller_Rabin(ll n) {
+    if (n == 2 || n == 7 || n == 61) return true;
+    if (n < 2 || !(n&1)) return false;
+    return test(2, n) && test(7, n) && test(61, n);
 }
 
 //唯一分解定理，先打个素数表优化试除法
