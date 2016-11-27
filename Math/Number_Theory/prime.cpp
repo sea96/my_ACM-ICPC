@@ -61,7 +61,7 @@ bool test(ll x, ll n) {
     while (!(m&1)) m >>= 1;
     x = pow_mod(x, m, n);
     for (; m<n-1 && x!=1 && x!=n-1; m<<=1) {
-        x = mul_mod(x, x, n);
+        x = mul_mod(x, x, n);  //防爆long long
     }
     return x == n-1 || (m&1) == 1;
 }
