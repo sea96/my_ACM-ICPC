@@ -5,17 +5,16 @@ void add_mod(int &a, int b, int mod) {
         a -= mod;
     }
 }
-//乘法取模，a * b % mod，复杂度 O(logb)
-int mul_mod(int a, int b, int mod) {
-    int ret = 0;
+//乘法取模，a * b % mod，复杂度O(logb)
+ll mul_mod(ll a, ll b, ll mod) {
+    ll ret = 0;
     a = (a % mod + mod) % mod;
     b = (b % mod + mod) % mod;
-    while (b) {
+    for (; b; b>>=1) {
         if (b & 1) {
             ret += a;
-            if (ret >= mod)   ret -= mod;
+            if (ret >= mod) ret -= mod;
         }
-        b >>= 1;
         a <<= 1;
         if (a >= mod) a -= mod;
     }
