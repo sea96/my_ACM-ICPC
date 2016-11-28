@@ -136,21 +136,17 @@ vector<int> divisor(int n)  {
  */
 //单独求数 欧拉函数phi[n]
 int phi(int n) {
-    int m = (int)sqrt (n + 0.5);
-    int ret = n;
-    for (int i=2; i<=m; ++i) {
-        if (n % i == 0) {
-            ret = ret / i * (i - 1);
-            while (n % i == 0) {
-                n /= i;
-            }
+    int ret = n, m = (int)sqrt(n+0.5);
+    for (int i=1; prime[i]<=m; ++i) {
+        if (n % prime[i] == 0) {
+            ret = ret / prime[i] * (prime[i] - 1);
+            while (n % prime[i] == 0) n /= prime[i];
         }
     }
-    if (n > 1) {
-        ret = ret / n * (n - 1);
-    }
+    if (n > 1) ret = ret / n * (n - 1);
     return ret;
 }
+
 //线性筛，复杂度 O(nloglogn)，还有欧拉筛素数顺便求phi[i]
 void phi_table(int n) {
     memset(phi, 0, sizeof (phi));
