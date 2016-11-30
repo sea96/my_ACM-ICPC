@@ -24,7 +24,6 @@ int Guass_elimination(Mat &A) {
             }
         }
     }
-
     //无解
     for (i=row; i<n; ++i) if (A[i][m] != 0) return -1;
     //无穷多解
