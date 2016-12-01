@@ -27,7 +27,7 @@ void ex_GCD(int a, int b, int &x, int &y, int &d) {
 }
 
 /*
- *模线性方程(modular_linear_equation) ax = b (mod n)
+ *模线性方程，求x，使得 ax = b (mod n)
  *转换为ax = ny + b，即ax + ny = b。答案保存在res里
  *返回true，有解；false，无解
  */
