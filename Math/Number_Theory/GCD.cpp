@@ -13,33 +13,32 @@ int quick_GCD(int a, int b) {
 }
 
 /*
-    *扩展欧几里得算法，求x, y 使得 ax + by = GCD (a, b)
-    *返回d = GCD (a,b)，和对应于等式 ax + by = d中的x，y
-    *求解 ax + by = c: 当c是d的倍数时，记倍数为k，解为x0=kx，y0=ky；否则无解
-    *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n, n为整数
-*/
+ *扩展欧几里得算法，求x, y，使得 ax + by = GCD(a, b)
+ *返回d = GCD(a,b)，和对应于等式 ax + by = d中的x，y
+ *求解 ax + by = c: 当c是d的倍数时，记倍数为k，解为x0=kx，y0=ky；否则无解
+ *通解：x = x0 + (b/d)*n, y = y0 - (a/d)*n, n为整数
+ */
 void ex_GCD(int a, int b, int &x, int &y, int &d) {
-    if (!b) {
-        x = 1; y = 0; d = a;
-    } else {
+    if (!b) { x = 1; y = 0; d = a; }
+    else {
         ex_GCD (b, a % b, y, x, d);
         y -= a / b * x;
     }
 }
+
 /*
-    *模线性方程(modular_linear_equation) ax = b (mod n)
-    *转换为ax = ny + b，即ax - ny = b。答案保存在xs里
-    *返回true，有解；false，无解
-*/
-bool mod_linear_equ(int a, int b, int n, std::vector<int> &xs) {
-    int x, y;
-    int d = ex_GCD (a, n, x, y);
-    if (b % d) {
-        return false;
-    }
-    x = x * (b / d) % n;
-    for (int i=1; i<=d; ++i) {
-        xs.push_back ((x + i * (n/d)) %n);
+ *模线性方程(modular_linear_equation) ax = b (mod n)
+ *转换为ax = ny + b，即ax + ny = b。答案保存在res里
+ *返回true，有解；false，无解
+ */
+bool linear_mod_equ(int a, int b, int mod, vector<int> &res) {
+    int x, y, d;
+    ex_GCD(a, mod, x, y, d);
+    if (b % d) return false;
+    x = x * (b/d) % mod;
+    res.push_back(x);
+    for (int i=1; i<d; ++i) {
+        res.push_back((x + (int)i*(mod/d)) % mod);
     }
     return true;
 }
