@@ -72,21 +72,16 @@ bool Miller_Rabin(ll n) {
 }
 
 //唯一分解定理，先打个素数表优化试除法
-void get_factors(int n) {
-    std::vector<Node> factors;
+void get_factors(int n, vector<Node> &res) {
     for (int i=1; i<=prime[0]; ++i) {
         if (n % prime[i] == 0) {
-            int f = prime[i], c = 0;
-            while (n % prime[i] == 0) {
-                n /= prime[i];
-                c++;
-            }
-            factors.push_back ((Node) {f, c});
+            int p = prime[i], c = 0;
+            while (n % p == 0) { n /= p; c++; }
+            res.push_back((Node){p, c});
         }
+        if (n <= 1 || is_prime[n]) break;  //小心RE
     }
-    if (n > 1) {
-        factors.push_back ((Node) {(n, 1});
-    }
+    if (n > 1) res.push_back((Node){n, 1});
 }
 /*
  *大整数分解，Pollard_rho 随机算法
