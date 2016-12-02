@@ -137,11 +137,11 @@ int phi(int n) {
             ret = ret / prime[i] * (prime[i] - 1);
             while (n % prime[i] == 0) n /= prime[i];
         }
+        if (n == 1 || is_prime[n]) break;  //小心RE
     }
     if (n > 1) ret = ret / n * (n - 1);
     return ret;
 }
-
 //线性筛，复杂度 O(nloglogn)，还有欧拉筛素数顺便求phi[i]
 void phi_table(int n) {
     memset(phi, 0, sizeof (phi));
