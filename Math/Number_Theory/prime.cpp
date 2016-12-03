@@ -66,9 +66,14 @@ bool test(ll x, ll n) {
     return x == n-1 || (m&1) == 1;
 }
 bool Miller_Rabin(ll n) {
-    if (n == 2 || n == 7 || n == 61) return true;
+    if (n == 2 || n == 3 || n == 5 || n == 7 || n == 11
+        || n == 13 || n == 17 || n == 19 || n == 23 
+        || n == 29 || n == 31 || n == 37) return true;
     if (n < 2 || !(n&1)) return false;
-    return test(2, n) && test(7, n) && test(61, n);
+    return test(2, n) && test(3, n) && test(5, n)
+        && test(7, n) && test(11, n) && test(13, n) 
+        && test(17, n) && test(19, n) && test(23, n)
+        && test(29, n) && test(31, n) && test(37, n);
 }
 
 //唯一分解定理，先打个素数表优化试除法
@@ -83,31 +88,32 @@ void get_factors(int n, vector<Node> &res) {
     }
     if (n > 1) res.push_back((Node){n, 1});
 }
-/*
- *大整数分解，Pollard_rho 随机算法
- *factorize ()保存质因数在vector
- */
-ll Pollard_rho(ll x, ll c) {
-    ll i = 1, k = 2;
-    ll a = rand () % x;
-    ll b = a;
+//Pollard_rho 随机算法，找到一个n的较小的约数
+ll Pollard_rho(ll n, int c) {
+    ll i = 1, k = 2, x = rand()%n, y = x, d;
     while (1) {
         i++;
-        a = (multi_mod (a, a, x) + c) % x;
-        ll d = GCD (b - a, x);
-        if (d != 1 && d != x)   return d;
-        if (b == a) return x;
-        if (i == k) b = a, k += k;
+        x = (mul_mod(x, x, n)+c) % n;
+        d = GCD(y-x, n);  //y-x可能小于0，GCD需要改动
+        if (d!=1 && d!=n) return d;
+        if (y == x) return n;
+        if (i == k) { y = x; k <<= 1; }
     }
 }
-void factorize(ll n, vector<ll> &ret) {  //ret保存质因数，无序
-    if (Miller_Rabin (n)) {  //素数
-        ret.push_back(n);  return ;
+/*
+ *大整数质因数分解
+ *ret存储n的所有质因子，c是任意一个数字
+ */
+void factorize(ll n, int c, vector<ll> &ret) {
+    if (n == 1) return ;
+    if (Miller_Rabin(n)) {
+        ret.push_back(n);
+        return ;
     }
     ll p = n;
-    while (p >= n)   p = Pollard_rho(p, rand () % (n - 1) + 1);
-    factorize(p, ret);
-    factorize(n / p, ret);
+    while (p >= n) p = Pollard_rho(p, c--);
+    factorize(p, c, ret);
+    factorize(n/p, c, ret);
 }
 
 //约数枚举，复杂度O (sqrt(n)) By TiaoZhan
