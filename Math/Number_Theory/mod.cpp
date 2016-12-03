@@ -21,14 +21,11 @@ ll mul_mod(ll a, ll b, ll mod) {
     return ret;
 }
 //乘方取模(快速幂)，x ^ n % mod，复杂度 O(logn)
-int pow_mod(int x, int n, int mod) {
-    int ret = 1;
-    while (n) {
-        if (n & 1) {
-            ret = (ll) ret * x % mod;
-        }
-        x = (ll) x * x % mod;
-        n >>= 1;
+ll pow_mod(ll x, ll n, ll mod) {
+    ll ret = 1;
+    for (; n; n>>=1) {
+        if (n & 1) ret = ret * x % mod;
+        x = x * x % mod;
     }
     return ret;
 }
