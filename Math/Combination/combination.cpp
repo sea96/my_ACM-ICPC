@@ -12,6 +12,18 @@ void init() {
     }
 }
 
+//C(n, k)，分子和分母分别累乘，时间复杂度O(min(k, n-k))
+long long binom(long long n, long long k) {
+    if (k > n - k) k = n - k;
+    long long a = 1, b = 1;
+    for (int i=1; i<=k; ++i) {
+        a *= (n + 1 - i);
+        b *= i;
+        if (a % b == 0) { a /= b; b = 1; }
+    }
+    return a / b;
+}
+
 //要求MOD是质数，预处理时间复杂度O(n)
 const int N = 1e5 + 10;
 const int MOD = 1e9 + 7;
