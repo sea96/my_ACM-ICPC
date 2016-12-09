@@ -144,3 +144,11 @@ ostream& operator << (ostream &out, const BigInteger &x) {
     for (int i=x.len-1; i>=1; --i) printf ("%08d", x.s[i]);
     return out;
 }
+
+BigInteger f[105];  //卡特兰数
+void Catalan() {
+    f[0] = 1; f[1] = 1;
+    for (int i=2; i<=100; ++i) {
+        f[i] = f[i-1] * (4*i-2) / (i+1);
+    }
+}
