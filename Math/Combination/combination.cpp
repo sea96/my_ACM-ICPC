@@ -50,5 +50,5 @@ ll comb(ll n, ll k, ll p)  {
 ll Lucas(ll n, ll k, ll p) {
     if (n < k) return 0;
     if (!k) return 1;
-    return comb(n%p, k%p, p, id) * Lucas(n/p, k/p, p) % p;
+    return comb(n%p, k%p, p) * Lucas(n/p, k/p, p) % p;
 }
