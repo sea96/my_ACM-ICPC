@@ -28,3 +28,9 @@ http://www.renfei.org/blog/isap.html
 http://www.renfei.org/blog/bipartite-matching.html
 //带权最短路 Dijkstra, SPFA, Bellman-Ford, ASP, Floyd-Warshall 算法分析
 http://www.renfei.org/blog/weighted-shortest-path.html
+
+//CRT
+http://blog.csdn.net/synapse7/article/details/9946013
+http://blog.miskcoo.com/2014/09/chinese-remainder-theorem#i
+https://hrbust-acm-team.gitbooks.io/acm-book/content/number_theory/chinese_remainder_theorem.html
+http://blog.csdn.net/u010579068/article/details/45422941
