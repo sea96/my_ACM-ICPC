@@ -1,7 +1,7 @@
 /*
- *中国剩余定理：最小的x，x=a[i](mod m[i]) (1<=i<=k)
+ *中国剩余定理（Chinese_remainder_theorem）：最小的x，x=a[i](mod m[i]) (1<=i<=k)
  */
-ll China(ll *a, ll *m, int k) {
+ll CRT(ll *a, ll *m, int k) {
     ll M = 1, x, y, z, ret = 0;
     for (int i=1; i<=k; ++i) M *= m[i];
     for (int i=1; i<=k; ++i) {
