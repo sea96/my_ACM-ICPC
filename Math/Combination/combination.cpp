@@ -39,26 +39,16 @@ void init() {
         finv[i] = finv[i-1] * 1ll * inv[i] % MOD;
     }
 }
-//C (n, k) % MOD
-int comb(int n, int k)  {
-    if (k < 0 || k > n) return 0;
-    return f[n] * 1ll * finv[n-k] % MOD * finv[k] % MOD;
-}
 
-//Lucas定理，大组合数取模
-ll f[N];　　//f[n] = n!
-void init(int p)　{
-    f[0] = 1;
-    for (int i=1; i<=p; ++i) f[i] = f[i-1] * i % p;
+//C(n, k) % p
+ll comb(ll n, ll k, ll p)  {
+    if (k < 0 || k > n) return 0;
+    return f[n] * inv[f[n-k]*f[k]%p] % p;
 }
-//C (n, k) % p
-ll Lucas(ll n, ll k, int p)　{
-     ll ret = 1;
-     while (n && k) {
-        ll nn = n % p, kk = k % p;
-        if (nn < kk) return 0;                   //inv (f[kk]) = f[kk] ^ (p - 2) % p
-        ret = ret * f[nn] * pow_mod (f[kk] * f[nn-kk] % p, p - 2, p) % p;
-        n /= p, k /= p;
-     }
-     return ret;
+//Lucas定理，大组合数取模。要求p是质数
+//如果p不是质数，质因数分解后用Lucas定理，然后用中国剩余定理（CRT）。
+ll Lucas(ll n, ll k, ll p) {
+    if (n < k) return 0;
+    if (!k) return 1;
+    return comb(n%p, k%p, p, id) * Lucas(n/p, k/p, p) % p;
 }
