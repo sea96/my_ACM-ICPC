@@ -8,9 +8,9 @@ typedef vector<Vec> Mat;  //矩阵用多行vector表示
 Mat matrix_mul(const Mat &A, const Mat &B) {
     Mat ret(A.size(), Vec(B[0].size()));
     for (int i=0; i<A.size(); ++i)
-        for (int j=0; j<B[0].size(); ++j)
-            for (int k=0; k<A[0].size(); ++k)
-                ret[i][j] = (ret[i][j] + (ll)A[i][k]*B[k][j]%MOD) % MOD;  //可优化
+        for (int j=0; j<A[0].size(); ++j) if (A[i][j])
+            for (int k=0; k<B[0].size(); ++k) if (B[j][k])
+                add_mod(ret[i][k], A[i][j]*B[j][k]%MOD);
     return ret;
 }
 
