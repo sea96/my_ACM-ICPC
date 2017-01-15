@@ -54,6 +54,7 @@ double angle(Vector A, Vector B) {  //向量转角，逆时针，点积
 }
 Vector rotate(Vector A, double rad) {  //向量旋转，逆时针
     return Vector(A.x*cos(rad)-A.y*sin(rad), A.x*sin(rad)+A.y*cos(rad));
+    //坐标轴旋转（逆时针），坐标变换公式：x'=xcos(theta)+ysin(theta), y'=ycos(theta)-xsin(theta)
 }
 Vector normal(Vector A) {  //向量的单位法向量，确保A不是零向量
     double len = length(A);
