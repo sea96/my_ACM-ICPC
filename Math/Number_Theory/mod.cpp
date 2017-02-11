@@ -20,6 +20,11 @@ ll mul_mod(ll a, ll b, ll mod) {
     }
     return ret;
 }
+//乘法取模2，复杂度O(1) 
+ll mul_mod(ll a, ll b, ll mod) {
+    ll ret = a*b - (ll)((double)a*b/mod+0.001)*mod;
+    return ret < 0 ? ret + mod : ret;
+}
 //乘方取模(快速幂)，x ^ n % mod，复杂度 O(logn)
 ll pow_mod(ll x, ll n, ll mod) {
     ll ret = 1;
