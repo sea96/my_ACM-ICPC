@@ -20,7 +20,7 @@ ll mul_mod(ll a, ll b, ll mod) {
     }
     return ret;
 }
-//乘法取模2，复杂度O(1) 
+//乘法取模，复杂度O(1) 
 ll mul_mod(ll a, ll b, ll mod) {
     ll ret = a*b - (ll)((double)a*b/mod+0.001)*mod;
     return ret < 0 ? ret + mod : ret;
