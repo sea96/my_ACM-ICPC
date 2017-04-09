@@ -11,6 +11,7 @@ void prime_table(int n) {
         }
         for (int j=1; j<=p && i*prime[j]<=n; ++j) {
             is_prime[i*prime[j]] = false;
+            //当i能被prime[j]整除，那么i*prime[j+1]这个合数肯定被prime[j]乘以某个数筛掉
             if (i % prime[j] == 0) {
                 //phi[i*prime[j]] = phi[i] * prime[j];
                 break;
@@ -20,7 +21,7 @@ void prime_table(int n) {
         }
     }
 }
-/*
+/*b
  *素性测试，在小范围(1e5)内判素数个数以及单个数判素数有奇效
  *不适用于大范围判素数
  */
