@@ -21,7 +21,7 @@ void prime_table(int n) {
         }
     }
 }
-/*b
+/*
  *素性测试，在小范围(1e5)内判素数个数以及单个数判素数有奇效
  *不适用于大范围判素数
  */
@@ -148,19 +148,4 @@ int phi(int n) {
     }
     if (n > 1) ret = ret / n * (n - 1);
     return ret;
-}
-//线性筛，复杂度 O(nloglogn)，还有欧拉筛素数顺便求phi[i]
-void phi_table(int n) {
-    memset(phi, 0, sizeof (phi));
-    phi[1] = 1;
-    for (int i=2; i<=n; ++i) {
-        if (!phi[i]) {
-            for (int j=i; j<=n; j+=i) {
-                if (!phi[j]) {
-                    phi[j] = j;
-                }
-                phi[j] = phi[j] / i * (i - 1);
-            }
-        }
-    }
 }
