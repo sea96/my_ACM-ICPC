@@ -65,7 +65,7 @@ struct BigInteger {
             int i = k + 1 - rhs.len;
             if (i < 1) i = 1;
             for (; i<=k && i<=len; ++i)
-                tmp += (ll) s[i] * rhs.s[k+1-i];
+                tmp += (ll) s[i] * rhs.s[k+1-i];  //可能溢出，可以通过减少进制解决
             g = (int) (tmp / BASE);
             ret.s[k] = (int) (tmp % BASE);
         }
