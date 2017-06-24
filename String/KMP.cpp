@@ -1,15 +1,9 @@
-/*
-    T[]是文本串，P[]是模式串，lent，lenp是各自的长度
-    返回第一个匹配完成在文本串上的位置，不成功返回-1
-*/
-void get_fail(char *P, int lenp) {
-    int i = 0, j = -1;
-    fail[0] = -1;
-    while (i < lenp) {
-        if (j == -1 || P[j] == P[i]) {
-            i++; j++; fail[i] = j;
-        }
-        else j = fail[j];
+void getFail(char *p, int len) {
+    fail[0] = fail[1] = 0;
+    for (int i=1; i<len; ++i) {
+        int j = fail[i];
+        while (j && p[i] != p[j]) j = fail[j];
+        fail[i+1] = p[i] == p[j] ? j+1 : 0;
     }
 }
 
