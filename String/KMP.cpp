@@ -1,4 +1,4 @@
-// 用有限自动机画图理解
+// 用画有限自动机理解
 void getFail(char *p, int len) {
     int j = fail[0] = fail[1] = 0;
     for (int i=1; i<len; ++i) {
