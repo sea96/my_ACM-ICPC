@@ -1,9 +1,9 @@
+// 用有限自动机画图理解
 void getFail(char *p, int len) {
-    fail[0] = fail[1] = 0;
+    int j = fail[0] = fail[1] = 0;
     for (int i=1; i<len; ++i) {
-        int j = fail[i];
         while (j && p[i] != p[j]) j = fail[j];
-        fail[i+1] = p[i] == p[j] ? j+1 : 0;
+        fail[i+1] = p[i] == p[j] ? ++j : 0;
     }
 }
 
