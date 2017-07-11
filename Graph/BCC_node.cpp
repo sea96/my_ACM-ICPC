@@ -31,7 +31,6 @@ int Tarjan(int u, int fa) {
         if (lowv >= dfn[u]) {
             iscut[u] = true;
             bcc[++bcc_cnt].clear();
-            w[bcc_cnt] = 1;
             for (; ;) {
                 Edge &e = edges[sta[--top]];
                 if (bcc_no[e.u] != bcc_cnt) {
