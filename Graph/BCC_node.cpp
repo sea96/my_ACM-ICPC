@@ -1,25 +1,15 @@
-/*
-    *点双连通分量，时间复杂度O(V+E)
-*/
+//点双连通分量，时间复杂度O(V+E)
 struct Edge {
     int u, v, nex;
 }edges[M<<1];
 int head[N], etot;
-int dfn[N], low[N];
+int dfn[N];
 int sta[N], top;
 vector<int> bcc[N];
 int bcc_no[N];
 bool iscut[N];
 int dfs_clock, bcc_cnt;
 
-void addEdge(int u, int v) {
-    edges[etot] = Edge{u, v, head[u]};
-    head[u] = etot++;
-}
-void initGraph() {
-    memset(head, -1, sizeof(head));
-    etot = 0;
-}
 int Tarjan(int u, int fa) {
     int lowu = dfn[u] = ++dfs_clock;
     int child = 0, v;
@@ -52,7 +42,7 @@ int Tarjan(int u, int fa) {
     return lowu;
 }
 
-void findBcc() {
+void findBCC() {
     memset(dfn, 0, sizeof(dfn));
     memset(iscut, 0, sizeof(iscut));
     memset(bcc_no, 0, sizeof(bcc_no));
