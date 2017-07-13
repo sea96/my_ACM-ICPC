@@ -20,7 +20,7 @@ int Tarjan(int u) {
         	lowu = min(lowu, dfn[v]);
         }
     }
-    if (lowu == dfn[u]) {  //u是边双连通分量的第一个点
+    if (lowu == dfn[u]) {  // u是边双连通分量的第一个点
         ++bcc_cnt;
         int x;
         do {
