@@ -11,13 +11,13 @@ int Tarjan(int u) {
     int lowu = dfn[u] = ++dfs_clock;
     sta[top++] = u;
     for (int i=head[u]; ~i; i=edges[i].nex) {
-		int v = edges[i].v;
+        int v = edges[i].v;
         if (!dfn[v]) {
-        	vis[i] = vis[i^1] = true;
+            vis[i] = vis[i^1] = true;
             lowu = min(lowu, Tarjan(v));
         } else if (!vis[i]) {  // 支持有重边的图
-	        vis[i] = vis[i^1] = true;
-        	lowu = min(lowu, dfn[v]);
+            vis[i] = vis[i^1] = true;
+            lowu = min(lowu, dfn[v]);
         }
     }
     if (lowu == dfn[u]) {  // u是双连通分量的第一个点
@@ -25,7 +25,7 @@ int Tarjan(int u) {
         int x;
         do {
             x = sta[--top];
-			bcc_no[x] = bcc_cnt;
+            bcc_no[x] = bcc_cnt;
         } while (x != u);
     }
     return lowu;
