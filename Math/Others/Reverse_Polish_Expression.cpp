@@ -1,13 +1,11 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-/*
-    *表达式求值，逆波兰式(后缀表达式)算法
-    *输入(可以有空格，支持小数，实现'+-/*%')：((1+2)*5+1)/4=
-    *注意：取模一定是要整型，实现版本数字全是double，强制类型转换可能倒置错误
-    *转换为后缀表达式： 得到：1 2 + 5 * 1 + 4 / =
-    *计算后缀表达式：得到：4.00
-*/
+
+// 表达式求值，逆波兰式（后缀表达式）算法
+// 输入(可以有空格，支持小数，实现'+-/*%')：((1+2)*5+1)/4=
+// 注意：取模一定是要整型，实现版本数字全是double，强制类型转换可能导致错误
+// 转换为后缀表达式： 得到：1 2 + 5 * 1 + 4 / =
+// 计算后缀表达式：得到：4.000000
 struct Reverse_Polish_Expression {
     stack<char> op;
     stack<double> num;
@@ -23,20 +21,15 @@ struct Reverse_Polish_Expression {
             default:  return 0;
         }
     }
-    bool is_digit(char ch) {
-        return '0' <= ch && ch <= '9';
-    }
     string get_postfix(string s) {  //中缀表达式转变后缀表达式
         while (!op.empty()) op.pop();
         op.push('#');
         string ret = "";
         int len = s.length(), i = 0;
         while (i < len) {
-            if(s[i] == ' ' || s[i] == '=') {
-                i++; continue;
-            } else if (s[i] == '(') {
-                op.push(s[i++]);
-            } else if (s[i] == ')') {
+            if(s[i] == ' ' || s[i] == '=') { i++; continue; }
+            else if (s[i] == '(') op.push(s[i++]);
+            else if (s[i] == ')') {
                 while (op.top() != '(') {
                     ret += op.top(); ret += ' ';
                     op.pop();
@@ -49,7 +42,7 @@ struct Reverse_Polish_Expression {
                 }
                 op.push(s[i++]);
             } else {
-                while (is_digit(s[i]) || s[i] == '.') {
+                while (isdigit(s[i]) || s[i] == '.') {
                     ret += s[i++];
                 }
                 ret += ' ';
@@ -62,7 +55,7 @@ struct Reverse_Polish_Expression {
         ret += '=';
         return ret;
     }
-    double cal(double a, double b, char ch) {
+    double calc(double a, double b, char ch) {
         if (ch == '+') return a + b;
         if (ch == '-') return a - b;
         if (ch == '*') return a * b;
@@ -78,20 +71,18 @@ struct Reverse_Polish_Expression {
         error = false;
         int len = s.length(), i = 0;
         while (i < len)  {
-            if (s[i] == ' ' || s[i] == '=') {i++; continue;}
+            if (s[i] == ' ' || s[i] == '=') { i++; continue; }
             else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '%')  {
                 double a = num.top(); num.pop();
                 double b = num.top(); num.pop();
-                num.push(cal(b, a, s[i])); i++;
+                num.push(calc(b, a, s[i])); i++;
             } else {
                 double x = 0;
-                while (is_digit(s[i])) {
-                    x = x * 10 + s[i] - '0';    i++;
-                }
+                while (isdigit(s[i])) { x = x * 10 + s[i] - '0'; i++; }
                 if (s[i] == '.') {
                     double k = 10.0, y = 0;
                     i++;
-                    while (is_digit(s[i])) {
+                    while (isdigit(s[i])) {
                         y += ((s[i] - '0') / k);
                         i++; k *= 10;
                     }
@@ -105,14 +96,11 @@ struct Reverse_Polish_Expression {
 }RPN;
 
 int main() {
-    ios::sync_with_stdio(false);  //如果全用流的话，加这句话能跑快点
+    ios::sync_with_stdio(false);
     cin.tie(0);
-    int T; cin >> T;
-    string str; getline(cin, str);
-    while (T--) {
-        getline(cin, str);
-        cout << RPN.get_postfix(str) << endl;
-        cout << fixed << setprecision(6) << RPN.solve(str) << endl;
-    }
+    string str;
+    getline(cin, str);
+    cout << RPN.get_postfix(str) << endl;
+    cout << fixed << setprecision(6) << RPN.solve(str) << endl;
     return 0;
 }
