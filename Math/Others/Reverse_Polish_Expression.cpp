@@ -30,21 +30,13 @@ struct Reverse_Polish_Expression {
             if(s[i] == ' ' || s[i] == '=') { i++; continue; }
             else if (s[i] == '(') op.push(s[i++]);
             else if (s[i] == ')') {
-                while (op.top() != '(') {
-                    ret += op.top(); ret += ' ';
-                    op.pop();
-                }
+                while (op.top() != '(') { ret += op.top(); ret += ' '; op.pop(); }
                 op.pop(); i++;
             } else if (s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '%')  {
-                while (prior(op.top()) >= prior(s[i])) {
-                    ret += op.top();   ret += ' ';
-                    op.pop();
-                }
+                while (prior(op.top()) >= prior(s[i])) { ret += op.top(); ret += ' '; op.pop(); }
                 op.push(s[i++]);
             } else {
-                while (isdigit(s[i]) || s[i] == '.') {
-                    ret += s[i++];
-                }
+                while (isdigit(s[i]) || s[i] == '.') ret += s[i++];
                 ret += ' ';
             }
         }
@@ -82,10 +74,7 @@ struct Reverse_Polish_Expression {
                 if (s[i] == '.') {
                     double k = 10.0, y = 0;
                     i++;
-                    while (isdigit(s[i])) {
-                        y += ((s[i] - '0') / k);
-                        i++; k *= 10;
-                    }
+                    while (isdigit(s[i])) { y += ((s[i] - '0') / k); i++; k *= 10; }
                     x += y;
                 }
                 num.push(x);
@@ -99,8 +88,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     string str;
-    getline(cin, str);
-    cout << RPN.get_postfix(str) << endl;
-    cout << fixed << setprecision(6) << RPN.solve(str) << endl;
+	getline(cin, str);
+	cout << RPN.get_postfix(str) << endl;
+	cout << fixed << setprecision(6) << RPN.solve(str) << endl;
     return 0;
 }
