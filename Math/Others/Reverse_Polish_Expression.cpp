@@ -88,8 +88,8 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     string str;
-	getline(cin, str);
-	cout << RPN.get_postfix(str) << endl;
-	cout << fixed << setprecision(6) << RPN.solve(str) << endl;
+    getline(cin, str);
+    cout << RPN.get_postfix(str) << endl;
+    cout << fixed << setprecision(6) << RPN.solve(str) << endl;
     return 0;
 }
