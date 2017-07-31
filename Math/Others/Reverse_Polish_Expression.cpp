@@ -5,7 +5,7 @@ using namespace std;
 // 输入(可以有空格，支持小数，实现'+-/*%')：((1+2)*5+1)/4=
 // 注意：取模一定是要整型，实现版本数字全是double，强制类型转换可能导致错误
 // 转换为后缀表达式： 得到：1 2 + 5 * 1 + 4 / =
-// 计算后缀表达式：得到：4.000000
+// 计算后缀表达式得到：4.000000
 struct Reverse_Polish_Expression {
     stack<char> op;
     stack<double> num;
