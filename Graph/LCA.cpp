@@ -49,7 +49,7 @@ void DFS(int u, int fa) {
 
 void init_LCA() {
     for (int j=1; j<D; ++j) {
-        for (int i=0; i<n; ++i) {
+        for (int i=1; i<=n; ++i) {
             rt[i][j] = rt[i][j-1] == -1 ? -1 : rt[rt[i][j-1]][j-1];
         }
     }
