@@ -1,16 +1,29 @@
-//欧拉筛法(Euler)：返回n以内素数的个数（保存在prime[0]）， 复杂度O(n) ?
-void prime_table(int n) {
-    memset (is_prime, true, sizeof (is_prime));
-    is_prime[0] = is_prime[1] = false;
+// 埃氏筛法：返回n以内素数的个数（保存在prime[0]），复杂度O(nloglogn)
+void sieve(int n) {
+    memset(isprime, true, sizeof(isprime));
+    isprime[0] = isprime[1] = false;
+    int &p = prime[0] = 0;
+    int m = (int)(sqrt((double)n)+0.5);
+    for (int i=2; i<=m; ++i) {
+        if (isprime[i]) {
+            prime[++p] = i;
+            for (int j=i*i; j<=n; j+=i) isprime[j] = false;
+        }
+    }
+}
+// 欧拉筛法：复杂度O(n)
+void sieve(int n) {
+    memset (isprime, true, sizeof (isprime));
+    isprime[0] = isprime[1] = false;
     int &p = prime[0] = 0;
     //phi[1] = 1;
     for (int i=2; i<=n; ++i) {
-        if (is_prime[i]) {
+        if (isprime[i]) {
             prime[++p] = i;
             //phi[i] = i - 1;
         }
-        for (int j=1; j<=p && i*prime[j]<=n; ++j) {
-            is_prime[i*prime[j]] = false;
+        for (int j=1; i*prime[j]<=n; ++j) {
+            isprime[i*prime[j]] = false;
             //当i能被prime[j]整除，那么i*prime[j+1]这个合数肯定被prime[j]乘以某个数筛掉
             if (i % prime[j] == 0) {
                 //phi[i*prime[j]] = phi[i] * prime[j];
@@ -34,18 +47,8 @@ bool is_prime(int x) {
     return x != 1;
 }
 /*
- *素性测试，对sqrt(n)内的素数进行测试即可，预处理求出sqrt(n)中的素数，
- *假设该范围内素数的个数为s，那么复杂度降为O(s)。
+ *素性测试，对sqrt(n)内的素数进行测试即可，预处理求出sqrt(n)中的素数
  */
-bool is_prime(int x)   {
-    int p = seive (sqrt (x + 0.5));
-    for (int i=1; i<=p; ++i) {
-        if (x % prime[i] == 0) {
-            return false;
-        }
-    }
-    return x != 1;
-}
 /*
  *素性测试，Miller_Rabin 测试算法
  *if n < 3,215,031,751, just test a = 2, 3, 5, and 7;
