@@ -1,6 +1,5 @@
 /*
  * 最小费用最大流算法：每次在残余网络中沿着最短路增广(流最大前提下费用最小)
- * 时间复杂度O(?)
 */
 struct MinCostMaxFlow {
     struct Edge {
@@ -62,4 +61,4 @@ struct MinCostMaxFlow {
         flow = cost = 0;
         while (SPFA(flow, cost));
     }
-}MCMF;
+};
