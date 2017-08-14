@@ -1,6 +1,6 @@
 /*
-   *最小费用最大流算法：每次在残余网络中沿着最短路增广(流最大前提下费用最小)
-   *时间复杂度O(?)
+ * 最小费用最大流算法：每次在残余网络中沿着最短路增广(流最大前提下费用最小)
+ * 时间复杂度O(?)
 */
 struct MinCostMaxFlow {
     struct Edge {
@@ -9,29 +9,26 @@ struct MinCostMaxFlow {
     vector<Edge> edges;
     vector<int> G[N];
     bool vis[N];
-    int d[N], p[N], a[N]; //最短费用。上一条弧的序号。可改进量
+    int d[N], p[N], a[N]; //最短费用，上一条弧的序号，可改进量
     int n, m, s, t;
     
     void init(int n) {
         this->n = n;
-        for (int i=0; i<=n; ++i) {
-            G[i].clear();
-        }
+        for (int i=0; i<=n; ++i) G[i].clear();
         edges.clear();
     }
-    void add_edge(int from, int to, int cap, int cost) {
+    void addEdge(int from, int to, int cap, int cost) {
         edges.push_back(Edge{from, to, cap, 0, cost});
         edges.push_back(Edge{to, from, 0, 0, -cost});
         m = edges.size();
-        G[from].push_back(m - 2);
-        G[to].push_back(m - 1);
+        G[from].push_back(m-2);
+        G[to].push_back(m-1);
     }
     bool SPFA(int &flow, int &cost) {
         memset(d, INF, sizeof(d));
         memset(vis, false, sizeof(vis));
         memset(p, -1, sizeof(p));
         d[s] = 0; vis[s] = true; p[s] = 0; a[s] = INF;
-
         queue<int> que; que.push(s);
         while (!que.empty()) {
             int u = que.front(); que.pop();
@@ -49,7 +46,6 @@ struct MinCostMaxFlow {
                 }
             }
         }
-
         if (d[t] == INF) return false;
         flow += a[t];
         cost += d[t] * a[t];
@@ -65,5 +61,5 @@ struct MinCostMaxFlow {
         this->s = s; this->t = t;
         flow = cost = 0;
         while (SPFA(flow, cost));
-    }   
-};
+    }
+}MCMF;
