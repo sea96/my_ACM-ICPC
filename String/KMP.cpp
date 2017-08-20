@@ -8,13 +8,11 @@ void getFail(char *p, int len) {
 }
 
 int KMP(char *T, char *P) {
-    int lent = strlen(T);
-    int lenp = strlen(P);
-    get_fail(P, lenp);
-    int i = 0, j = 0;
-    while (i < lent) {
-        while (j != -1 && T[i] != P[j]) j = fail[j];
-        i++; j++;
+    int len_t = strlen(T), len_p = strlen(P);
+    getFail(P, len_p);
+    for (int j=0, i=0; i<len_t; ++i) {
+        while (j && P[j] != T[i]) j = fail[j];
+        j += (P[j] == T[i]);
         if (j == lenp) return i - j + 1;
         //统计出现次数：ans++; j = 0（不重复）/fail[j]（可重复）
     }
