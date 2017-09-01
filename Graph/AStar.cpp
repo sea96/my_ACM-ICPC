@@ -1,4 +1,3 @@
-int n, m;
 struct Edge {
     int v, w, nex;
 }edges[M];
