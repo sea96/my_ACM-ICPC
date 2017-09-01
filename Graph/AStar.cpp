@@ -30,6 +30,7 @@ void Dijkstra(int s) {
 }
 
 // A*求第k短路，先在反图以终点为起点跑一遍最短路
+// 次短路只要在Dijkstra算法稍加修改（二维数组）
 struct Node {
     int g, v;
     bool operator < (const Node &rhs) const {
