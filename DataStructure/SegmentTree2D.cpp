@@ -25,7 +25,6 @@ struct SegTree2D {
             if (x2 > mid) query2D(rson);
         }
     }
-
     void modify1D(int l, int r, int o) {
         if (l == r) {
             if (xleaf) {
