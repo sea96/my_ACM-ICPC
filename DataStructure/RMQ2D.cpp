@@ -13,7 +13,7 @@ void initRMQ(int n, int m) {
         }
     }
 }
-//(r1, c1) (r2, c2)
+// (r1, c1)->(r2, c2)
 int RMQ2D(int r1, int c1, int r2, int c2) {
     int kr = 0, kc = 0;
     while ((1<<(kr+1)) <= r2-r1+1) kr++;
